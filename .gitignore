@@ -1,0 +1,6 @@
+# FOLDERS
+node_modules/
+.vscode/
+
+# FILES
+*/**/css/main.css*

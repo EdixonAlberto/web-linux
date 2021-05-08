@@ -1,0 +1,39 @@
+{
+  "name": "web-liss",
+  "version": "0.0.1",
+  "description": "Diosa oaxaqueña",
+  "license": "UNLICENSED",
+  "private": true,
+  "keywords": [
+    "website",
+    "portfolio"
+  ],
+  "author": {
+    "name": "Edixon Piña",
+    "email": "edixonalbertto@gmail.com",
+    "url": "https://www.edixonalberto.com"
+  },
+  "scripts": {
+    "lint": "prettier --write ./**/*.{html,css,scss,js}",
+    "sass-watch": "sass --watch src/scss/main.scss:public/static/css/main.css",
+    "sass-build": "sass --style=compressed --no-source-map src/scss/main.scss:public/static/css/main.css",
+    "serve": "live-server ./public --port=5500",
+    "build": "npm run sass-build",
+    "start": "concurrently \"npm run sass-watch\" \"npm run serve\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdixonAlberto/web-liss.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EdixonAlberto/web-liss/issues"
+  },
+  "homepage": "https://github.com/EdixonAlberto/web-liss#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "concurrently": "^6.1.0",
+    "live-server": "^1.2.1",
+    "prettier": "^2.2.1",
+    "sass": "^1.32.12"
+  }
+}

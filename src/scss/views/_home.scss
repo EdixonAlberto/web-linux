@@ -1,0 +1,32 @@
+header {
+  height: 40px;
+  width: 100%;
+  background-color: black;
+
+  // TODO: por ahora flex, pero creo que mejor grid
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 0.8rem;
+  color: white;
+}
+
+main {
+  height: calc(100vh - 40px);
+  background-image: url('../images/wallpaper-uwu.png');
+  background-repeat: no-repeat;
+  background-position: 100%;
+  background-size: cover;
+
+  .widgets {
+    height: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
