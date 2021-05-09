@@ -1,0 +1,43 @@
+// FONT-ROBOTO
+
+@font-face {
+  src: url('../fonts/Roboto-Black.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-weight: 800;
+}
+
+@font-face {
+  src: url('../fonts/Roboto-Bold.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-weight: 700;
+}
+
+@font-face {
+  src: url('../fonts/Roboto-Medium.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-weight: 500;
+}
+
+@font-face {
+  src: url('../fonts/Roboto-Regular.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-weight: 400;
+}
+
+@font-face {
+  src: url('../fonts/Roboto-Light.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-weight: 200;
+}
+
+@font-face {
+  src: url('../fonts/Roboto-Thin.ttf') format('truetype');
+  font-family: 'Roboto';
+  font-weight: 100;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+// TODO: agregar fuentes de fira-mono
