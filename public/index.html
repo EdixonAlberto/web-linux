@@ -1,24 +1,93 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- STYLES -->
+    <link rel="stylesheet" href="static/font-awesome-4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="static/css/main.css" />
 
     <title>SkyLiss</title>
   </head>
   <body>
     <div class="app">
-      <header>Thursday April 08, 20:10</header>
+      <header>
+        <span>Website SkyLiss</span>
+        <div class="time">Thursday April 08, 20:10</div>
+      </header>
 
       <main>
-        <div class="widgets">Website SkyLiss</div>
-      </main>
+        <div class="widgets">
+          <div class="col">
+            <div class="row avatar">
+              <div>
+                <img src="static/images/avatar.png" alt="Avatar" />
+              </div>
 
-      <!-- <footer></footer> -->
+              <p><span>arch</span>@<span>alisson</span></p>
+            </div>
+
+            <div class="row setting">
+              <div>
+                <i class="fa fa-cog" aria-hidden="true"></i>
+                <span>Settings</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="row custom">
+              <!-- TODO: alternar icono de sonido con logica js -->
+              <div class="progress-bar">
+                <i class="fa fa fa-volume-down"></i>
+                <div class="bar"></div>
+              </div>
+
+              <div class="progress-bar">
+                <i class="fa fa-sun-o" aria-hidden="true"></i>
+                <div class="bar"></div>
+              </div>
+
+              <div class="progress-bar">
+                <i class="fa fa-sun-o" aria-hidden="true"></i>
+                <div class="bar"></div>
+              </div>
+            </div>
+
+            <div class="row disk-container">
+              <div class="disk">
+                <span>/</span>
+                <div class="circle">
+                  <span>6%</span>
+                </div>
+                <span>262 GB free</span>
+              </div>
+
+              <div class="disk">
+                <span>/gdrive</span>
+                <div class="circle">
+                  <span>6%</span>
+                </div>
+                <span>14 GB free</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="row time">
+              <p>
+                <span>20</span>
+                <span>10</span>
+              </p>
+            </div>
+            <div class="row calendar">
+              <!-- TODO: crear calendario dinamico -->
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   </body>
 </html>

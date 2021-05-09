@@ -1,0 +1,211 @@
+.widgets {
+  height: 300px;
+  width: 750px;
+
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
+  align-items: center;
+  justify-items: center;
+
+  .col {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+    justify-content: center;
+
+    .row {
+      width: 100%;
+      padding: 20px 0;
+
+      color: $color-font-widget;
+      background-color: $color-back-widget;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.2s ease-in-out;
+
+      user-select: none;
+
+      &:hover {
+        transform: scale(0.98);
+        // TODO: Experimentar con transparents dinamicos
+        // background-color: rgba(0, 0, 0, 0.45);
+      }
+    }
+
+    &:nth-child(1) {
+      width: 25%;
+
+      .row {
+        &.avatar {
+          height: 90%;
+
+          & > div {
+            height: 80%;
+
+            img {
+              height: 90%;
+              width: 100%;
+              display: block;
+              text-align: center;
+              clip-path: circle();
+            }
+          }
+
+          p {
+            font-size: 1rem;
+            text-align: center;
+            margin: 0;
+
+            span {
+              color: $color-font-blue;
+              font-weight: 500;
+            }
+          }
+        }
+
+        &.setting {
+          height: 10%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          i,
+          span {
+            font-size: 1.1rem;
+            font-weight: 700;
+          }
+
+          i {
+            color: $color-purple;
+            margin-right: 10px;
+          }
+
+          span {
+            text-transform: uppercase;
+          }
+        }
+      }
+    }
+
+    &:nth-child(2) {
+      width: 36%;
+
+      .row {
+        &.custom {
+          height: 67%;
+          display: flex;
+          flex-direction: column;
+          row-gap: inherit;
+          justify-content: center;
+
+          .progress-bar {
+            display: flex;
+            flex-direction: row;
+            row-gap: 20px;
+            align-items: center;
+            justify-content: space-evenly;
+
+            i {
+              width: 18px;
+              font-size: 18px;
+              text-align: center;
+            }
+
+            .bar {
+              $borderRadius: 5px;
+
+              height: 12px;
+              width: 75%;
+              position: relative;
+
+              background-color: $color-back-figure;
+              border: none;
+              border-radius: $borderRadius;
+
+              &::before {
+                content: '';
+                position: absolute;
+                height: 12px;
+                width: 40%;
+                background-color: $color-back-blue;
+                border-radius: $borderRadius;
+              }
+            }
+          }
+        }
+
+        &.disk-container {
+          height: 33%;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-evenly;
+
+          .disk {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-weight: 400;
+
+            .circle {
+              $rotate: 45deg;
+
+              height: 35px;
+              width: 35px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              position: relative;
+
+              border: 11px solid $color-back-figure;
+              border-top-color: $color-disk;
+              border-radius: 50%;
+              margin: 10px 0;
+              font-size: 0.8rem;
+              transform: rotate(-$rotate);
+
+              span {
+                transform: rotate($rotate);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &:nth-child(3) {
+      width: 46%;
+
+      .row {
+        width: 100%;
+
+        &.time {
+          height: 12%;
+          text-align: center;
+
+          p {
+            line-height: 2.5rem;
+            font-size: 3rem;
+            margin: 0;
+
+            span {
+              font-weight: 500;
+              color: $color-font-widget;
+
+              &:last-child {
+                color: $color-font-red;
+              }
+            }
+          }
+        }
+
+        &.calendar {
+          height: 70%;
+        }
+      }
+    }
+  }
+}
