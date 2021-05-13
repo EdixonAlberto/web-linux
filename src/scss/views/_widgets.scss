@@ -8,6 +8,9 @@
   align-items: center;
   justify-items: center;
 
+  font-family: 'Firamono', sans-serif;
+  font-size: 0.9rem;
+
   .col {
     height: 100%;
     display: flex;
@@ -55,7 +58,6 @@
           }
 
           p {
-            font-size: 1rem;
             text-align: center;
             margin: 0;
 
@@ -74,13 +76,11 @@
 
           i,
           span {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-weight: 500;
           }
 
           i {
             color: $color-purple;
-            margin-right: 10px;
           }
 
           span {
@@ -192,11 +192,12 @@
             margin: 0;
 
             span {
-              font-weight: 500;
+              font-weight: 400;
               color: $color-font-widget;
 
               &:last-child {
                 color: $color-font-red;
+                margin-left: 6px;
               }
             }
           }
