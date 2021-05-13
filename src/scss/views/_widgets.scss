@@ -205,6 +205,20 @@
 
         &.calendar {
           height: 70%;
+
+          .vc-container {
+            height: 0;
+            top: -20px;
+            border: none;
+            background-color: $color-back-widget;
+            color: white;
+
+            .vc-weeks {
+              top: -27px;
+              transform: scale(0.7);
+              padding: 0;
+            }
+          }
         }
       }
     }

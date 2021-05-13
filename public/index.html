@@ -12,10 +12,10 @@
     <title>SkyLiss</title>
   </head>
   <body>
-    <div class="app">
+    <div id="app">
       <header>
         <span>Website SkyLiss</span>
-        <div class="time">Thursday April 08, 20:10</div>
+        <div class="time">{{ getDate() }}</div>
       </header>
 
       <main>
@@ -51,7 +51,7 @@
               </div>
 
               <div class="progress-bar">
-                <i class="fa fa-sun-o" aria-hidden="true"></i>
+                <i class="fa fa-battery-half" aria-hidden="true"></i>
                 <div class="bar"></div>
               </div>
             </div>
@@ -78,16 +78,25 @@
           <div class="col">
             <div class="row time">
               <p>
-                <span>20</span>
-                <span>10</span>
+                <span v-text="date.getHours()"></span
+                ><span v-text="date.getMinutes()"></span>
               </p>
             </div>
             <div class="row calendar">
-              <!-- TODO: crear calendario dinamico -->
+              <v-calendar is-expanded weekdays="WWW"></v-calendar>
             </div>
           </div>
         </div>
       </main>
     </div>
+
+    <!-- VUE-PRODUCTION -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+    <!-- VUE-DEVELOPMENT -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- V-CALENDAR -->
+    <script src="https://unpkg.com/v-calendar"></script>
+    <!-- APP -->
+    <script src="App.js"></script>
   </body>
 </html>
