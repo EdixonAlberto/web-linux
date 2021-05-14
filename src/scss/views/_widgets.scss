@@ -216,10 +216,25 @@
             background-color: $color-back-widget;
             color: white;
 
+            .vc-header {
+              .vc-title {
+                color: $color-font-red;
+              }
+            }
+
             .vc-weeks {
               top: -27px;
               transform: scale(0.7);
               padding: 0;
+            }
+
+            .vc-arrows-container {
+              [role='button'] {
+                color: white;
+                &:hover {
+                  background-color: $color-back-blue;
+                }
+              }
             }
           }
         }
