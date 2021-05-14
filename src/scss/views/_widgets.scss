@@ -125,8 +125,7 @@
               border: none;
               border-radius: $borderRadius;
 
-              &::before {
-                content: '';
+              span {
                 position: absolute;
                 height: 12px;
                 width: 40%;

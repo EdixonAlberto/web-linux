@@ -15,7 +15,7 @@
     <div id="app">
       <header>
         <span>Website SkyLiss</span>
-        <div class="time">{{ getDate() }}</div>
+        <div class="time">{{ dateDynamic.time }}</div>
       </header>
 
       <main>
@@ -42,17 +42,23 @@
               <!-- TODO: alternar icono de sonido con logica js -->
               <div class="progress-bar">
                 <i class="fa fa fa-volume-down"></i>
-                <div class="bar"></div>
+                <div class="bar">
+                  <span :style="{ width: '60%' }"></span>
+                </div>
               </div>
 
               <div class="progress-bar">
                 <i class="fa fa-sun-o" aria-hidden="true"></i>
-                <div class="bar"></div>
+                <div class="bar">
+                  <span :style="{ width: '50%' }"></span>
+                </div>
               </div>
 
               <div class="progress-bar">
                 <i class="fa fa-battery-half" aria-hidden="true"></i>
-                <div class="bar"></div>
+                <div class="bar">
+                  <span :style="{ width: '40%' }"></span>
+                </div>
               </div>
             </div>
 
@@ -78,8 +84,8 @@
           <div class="col">
             <div class="row time">
               <p>
-                <span v-text="date.getHours()"></span
-                ><span v-text="date.getMinutes()"></span>
+                <span v-text="dateDynamic.hours"></span
+                ><span v-text="dateDynamic.minutes"></span>
               </p>
             </div>
             <div class="row calendar">
