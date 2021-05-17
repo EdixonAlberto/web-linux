@@ -18,13 +18,13 @@ new Vue({
   computed: {
     dateDynamic() {
       const weeks = [
+        'Sunday',
         'Monday',
         'Tuesday',
         'Wednesday',
-        'Thusday',
+        'Thursday',
         'Friday',
-        'Saturday',
-        'Sunday'
+        'Saturday'
       ]
       const months = [
         'January',
@@ -43,8 +43,9 @@ new Vue({
       const d = this.date
       const hours = d.getHours() < 10 ? '0' + d.getHours() : d.getHours()
       const minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()
+
       // prettier-ignore
-      const time = `${weeks[d.getDay() - 1]} ${months[d.getMonth()]} ${d.getMonth()} ${d.getDate()}, ${hours}:${minutes}`
+      const time = `${weeks[d.getDay()]} ${months[d.getMonth()]} ${d.getMonth()} ${d.getDate()}, ${hours}:${minutes}`
 
       return { time, hours, minutes }
     }
