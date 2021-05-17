@@ -9,12 +9,6 @@ new Vue({
     }
   },
 
-  methods: {
-    initDateDynamic() {
-      setInterval(() => (this.date = new Date()), 1000 * 60)
-    }
-  },
-
   computed: {
     dateDynamic() {
       const weeks = [
@@ -48,6 +42,16 @@ new Vue({
       const time = `${weeks[d.getDay()]} ${months[d.getMonth()]} ${d.getMonth()} ${d.getDate()}, ${hours}:${minutes}`
 
       return { time, hours, minutes }
+    }
+  },
+
+  methods: {
+    initDateDynamic() {
+      setInterval(() => (this.date = new Date()), 1000 * 60)
+    },
+
+    openDircord() {
+      window.open('https://discord.com/app', 'newwindow', 'width=700,height=600')
     }
   },
 
