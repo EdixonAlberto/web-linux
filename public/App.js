@@ -3,7 +3,9 @@ new Vue({
 
   data() {
     return {
-      date: new Date()
+      date: new Date(),
+      desktops: [1, 2, 3],
+      currentDesktop: 1
     }
   },
 

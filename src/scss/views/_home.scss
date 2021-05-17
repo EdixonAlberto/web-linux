@@ -1,9 +1,10 @@
 header {
   height: $height-header;
   width: 100%;
-  background-color: black;
+  background-color: $color-black;
+  @extend %disable-selection;
 
-  .task-bar {
+  .taskbar {
     height: 100%;
     display: flex;
     align-items: center;
@@ -14,33 +15,83 @@ header {
     font-size: 0.9rem;
 
     .desktop {
+      display: flex;
+      align-items: center;
+      z-index: 1;
+
+      .home {
+        i {
+          width: $width-icon-bar;
+          text-align: center;
+          font-size: $size-icon-bar;
+          line-height: $height-header;
+        }
+      }
+
+      .desktop-list {
+        display: flex;
+        flex-direction: row;
+        column-gap: 10px;
+        align-items: center;
+        margin-left: 10px;
+
+        .desktop-card,
+        .desktop-add {
+          cursor: pointer;
+          width: $width-icon-bar;
+          text-align: center;
+          line-height: $height-header;
+        }
+
+        .desktop-card {
+          &.active {
+            border-bottom: 2px solid $color-font-blue;
+          }
+        }
+
+        .desktop-add {
+          font-size: 22px;
+        }
+      }
     }
 
-    .time {
+    .date {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      text-align: center;
       font-size: 0.8rem;
       font-weight: 500;
+      line-height: $height-header;
+      z-index: 0;
     }
 
     .tool {
+      height: 100%;
       display: flex;
-
-      i {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 17px;
-      }
+      flex-direction: row;
+      column-gap: 10px;
+      align-items: center;
+      z-index: 1;
 
       i,
       svg {
-        height: 17px;
-        width: 17px;
+        cursor: pointer;
         font-weight: 100;
+      }
 
-        &:nth-child(2) {
-          margin: 0 14px;
-        }
+      i {
+        width: $width-icon-bar;
+        text-align: center;
+        line-height: $height-header;
+        font-size: $size-icon-bar;
+      }
+
+      svg {
+        height: 100%;
+        width: $size-icon-bar;
+        padding: 0 7.5px;
       }
     }
   }
