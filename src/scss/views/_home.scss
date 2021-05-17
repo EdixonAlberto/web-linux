@@ -104,8 +104,9 @@ main {
   background-position: 100%;
   background-size: cover;
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 5% 90% 5%;
+  grid-template-rows: 100%;
   align-items: center;
-  justify-content: center;
+  justify-items: center;
 }

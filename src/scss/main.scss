@@ -1,5 +1,5 @@
 * {
-  // outline: 1px solid red !important;
+  // outline: 1px solid #4dbb7b !important;
 }
 
 body {
@@ -11,4 +11,4 @@ body {
 @import 'variables';
 @import 'utils/extends';
 @import 'components/buttons';
-@import 'views/home', 'views/widgets';
+@import 'views/home', 'views/widget-center', 'views/widget-side';
