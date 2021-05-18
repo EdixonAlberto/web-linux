@@ -1,0 +1,33 @@
+@mixin slider-thumb {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background-color: transparent;
+}
+
+.liss-input {
+  cursor: pointer;
+  width: 100%;
+  height: 12px;
+  position: absolute;
+  margin: 0;
+  background-color: transparent;
+
+  &,
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-slider-thumb {
+    @include slider-thumb;
+  }
+
+  &::-moz-range-thumb {
+    @include slider-thumb;
+  }
+
+  &::-ms-thumb {
+    @include slider-thumb;
+  }
+}

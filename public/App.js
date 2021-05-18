@@ -3,9 +3,11 @@ new Vue({
 
   data() {
     return {
+      // TODO: guardar config en localstore
       date: new Date(),
       desktops: [1, 2, 3],
-      currentDesktop: 1
+      desktop: 1,
+      brightness: 8
     }
   },
 

@@ -1,6 +1,7 @@
 section.widget-center {
   height: 300px;
   width: 750px;
+  position: relative;
 
   display: flex;
   flex-direction: row;
@@ -136,6 +137,10 @@ section.widget-center {
                 background-color: $color-back-blue;
                 border-radius: $borderRadius;
               }
+
+              &:hover span {
+                background-color: rgba($color: $color-back-blue, $alpha: 0.8);
+              }
             }
           }
         }
@@ -183,8 +188,6 @@ section.widget-center {
       width: 46%;
 
       .row {
-        width: 100%;
-
         &.time {
           height: 12%;
           text-align: center;

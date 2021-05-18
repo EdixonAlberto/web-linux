@@ -10,5 +10,5 @@ body {
 @import 'typography';
 @import 'variables';
 @import 'utils/extends';
-@import 'components/buttons';
+@import 'components/button', 'components/input';
 @import 'views/home', 'views/widget-center', 'views/widget-side';

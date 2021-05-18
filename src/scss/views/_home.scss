@@ -109,4 +109,10 @@ main {
   grid-template-rows: 100%;
   align-items: center;
   justify-items: center;
+
+  .before {
+    width: 100%;
+    height: calc(100vh - #{$height-header});
+    position: absolute;
+  }
 }
