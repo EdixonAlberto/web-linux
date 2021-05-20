@@ -24,8 +24,8 @@ section.widget-center {
       width: 100%;
       padding: 20px 0;
 
-      color: $color-font-widget;
-      background-color: rgba($color: $color-black, $alpha: 0.9);
+      color: $color-nord-white;
+      background-color: rgba($color: $color-nord-black, $alpha: 0.9);
       border: none;
       border-radius: 10px;
       transition: all 0.2s ease-in-out;
@@ -33,7 +33,7 @@ section.widget-center {
 
       &:hover {
         transform: scale(1.02);
-        background-color: $color-black;
+        background-color: $color-nord-black;
       }
     }
 
@@ -61,7 +61,7 @@ section.widget-center {
             margin: 0;
 
             span {
-              color: $color-font-blue;
+              color: $color-nord-green;
               font-weight: 500;
             }
           }
@@ -82,7 +82,7 @@ section.widget-center {
 
           i {
             font-size: 18px;
-            color: $color-purple;
+            color: $color-nord-green;
           }
 
           span {
@@ -134,12 +134,12 @@ section.widget-center {
                 position: absolute;
                 height: 12px;
                 width: 40%;
-                background-color: $color-back-blue;
+                background-color: $color-nord-blue;
                 border-radius: $borderRadius;
               }
 
               &:hover span {
-                background-color: rgba($color: $color-back-blue, $alpha: 0.8);
+                background-color: rgba($color: $color-nord-blue, $alpha: 0.8);
               }
             }
           }
@@ -169,7 +169,7 @@ section.widget-center {
               position: relative;
 
               border: 11px solid $color-back-figure;
-              border-top-color: $color-disk;
+              border-top-color: $color-nord-yellow;
               border-radius: 50%;
               margin: 10px 0;
               font-size: 0.8rem;
@@ -199,10 +199,10 @@ section.widget-center {
 
             span {
               font-weight: 400;
-              color: $color-font-widget;
+              color: $color-nord-white;
 
               &:last-child {
-                color: $color-font-red;
+                color: $color-nord-red;
                 margin-left: 6px;
               }
             }
@@ -216,12 +216,12 @@ section.widget-center {
             height: 0;
             top: -20px;
             border: none;
-            background-color: $color-black;
+            background-color: $color-nord-black;
             color: white;
 
             .vc-header {
               .vc-title {
-                color: $color-font-red;
+                color: $color-nord-red;
               }
             }
 
@@ -229,13 +229,18 @@ section.widget-center {
               top: -27px;
               transform: scale(0.7);
               padding: 0;
+
+              .vc-weekday {
+                color: $color-nord-white;
+                font-weight: 700;
+              }
             }
 
             .vc-arrows-container {
               [role='button'] {
-                color: white;
+                color: $color-nord-white;
                 &:hover {
-                  background-color: $color-back-blue;
+                  background-color: $color-nord-blue;
                 }
               }
             }

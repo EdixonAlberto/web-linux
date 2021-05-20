@@ -1,7 +1,7 @@
 header {
   height: $height-header;
   width: 100%;
-  background-color: $color-black;
+  background-color: $color-nord-black;
   @extend %disable-selection;
 
   .taskbar {
@@ -45,7 +45,7 @@ header {
 
         .desktop-card {
           &.active {
-            border-bottom: 2px solid $color-font-blue;
+            border-bottom: 2px solid $color-nord-blue;
           }
         }
 
