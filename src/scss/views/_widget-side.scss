@@ -1,13 +1,76 @@
 section.widget-side {
+  width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 
-  // &:nth-of-type(1) {
-  // }
+  ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    align-items: flex-end;
+    justify-content: center;
 
-  // &:nth-of-type(3) {
-  // }
+    padding: 0;
+    margin: 0;
+  }
+
+  li.appbox {
+    cursor: pointer;
+    width: $size-appbox;
+    height: $size-appbox;
+    position: relative;
+
+    border: none;
+    border-radius: 7px;
+    background-color: $color-nord-black;
+    text-align: center;
+    transition: all 0.15s ease-in-out;
+
+    svg {
+      width: $size-icon-appbox + 5;
+      height: $size-appbox;
+      fill: #5e81ac;
+    }
+
+    i {
+      width: 100%;
+      height: 100%;
+      color: $color-nord-white;
+      font-size: $size-icon-appbox;
+      line-height: $size-appbox;
+
+      &.fa-firefox {
+        color: $color-nord-yellow;
+      }
+      &.fa-folder {
+        color: $color-nord-blue;
+      }
+      &.fa-terminal {
+        color: $color-nord-white;
+      }
+      &.fa-paint-brush {
+        color: #88c0d0;
+      }
+      &.fa-spotify {
+        color: #a3be8c;
+        font-size: $size-icon-appbox + 5;
+      }
+    }
+
+    &::marker {
+      // TODO: estilizar el marker
+      // content: '.';
+      width: 10px;
+      color: $color-nord-white;
+      font-weight: bold;
+
+      line-height: $size-appbox;
+    }
+
+    &:hover {
+      transform: scale(0.94);
+    }
+  }
 }
