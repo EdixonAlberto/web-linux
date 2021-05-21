@@ -5,32 +5,21 @@ section.widget-side {
   align-items: center;
   justify-content: center;
 
-  ul {
-    display: flex;
-    flex-direction: column;
-    row-gap: 7px;
-    align-items: flex-end;
-    justify-content: center;
-
-    padding: 0;
-    margin: 0;
-  }
-
-  li.appbox {
+  li.box {
     cursor: pointer;
-    width: $size-appbox;
-    height: $size-appbox;
+    width: $size-box;
+    height: $size-box;
     position: relative;
 
     border: none;
     border-radius: 7px;
     background-color: $color-nord-black;
     text-align: center;
-    transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in;
 
     svg {
-      width: $size-icon-appbox + 5;
-      height: $size-appbox;
+      width: $size-icon-box + 5;
+      height: $size-box;
       fill: #5e81ac;
     }
 
@@ -38,8 +27,8 @@ section.widget-side {
       width: 100%;
       height: 100%;
       color: $color-nord-white;
-      font-size: $size-icon-appbox;
-      line-height: $size-appbox;
+      font-size: $size-icon-box;
+      line-height: $size-box;
 
       &.fa-firefox {
         color: $color-nord-yellow;
@@ -55,22 +44,43 @@ section.widget-side {
       }
       &.fa-spotify {
         color: #a3be8c;
-        font-size: $size-icon-appbox + 5;
+        font-size: $size-icon-box + 5;
+      }
+    }
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    row-gap: 7px;
+    align-items: flex-end;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    &.apps li.box {
+      &.active::before {
+        content: '•';
+        position: absolute;
+        left: -10px;
+
+        color: $color-nord-white;
+        text-align: center;
+        font-size: 24px;
+        line-height: 48px;
+      }
+
+      &:hover {
+        transform: translateX(8px);
       }
     }
 
-    &::marker {
-      // TODO: estilizar el marker
-      // content: '.';
-      width: 10px;
-      color: $color-nord-white;
-      font-weight: bold;
-
-      line-height: $size-appbox;
-    }
-
-    &:hover {
-      transform: scale(0.94);
+    &.power li.box {
+      &:hover {
+        transform: translateX(-8px);
+      }
     }
   }
 }
