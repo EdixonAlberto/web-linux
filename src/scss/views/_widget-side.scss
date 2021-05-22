@@ -4,6 +4,7 @@ section.widget-side {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: $z-index-window + 1;
 
   li.box {
     cursor: pointer;

@@ -5,10 +5,11 @@
 body {
   padding: 0;
   margin: 0;
+  overflow: hidden;
 }
 
 @import 'typography';
 @import 'variables';
 @import 'utils/extends';
 @import 'components/button', 'components/input';
-@import 'views/home', 'views/widget-center', 'views/widget-side';
+@import 'views/home', 'views/widget-center', 'views/widget-side', 'views/window';

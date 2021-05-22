@@ -1,0 +1,28 @@
+$size-header: 20px;
+
+.window {
+  width: 680px;
+  height: 480px;
+
+  border: none;
+  border-radius: 5px;
+  background-color: $color-nord-black;
+
+  position: absolute;
+  top: $height-header;
+  z-index: $z-index-window;
+
+  font-family: 'Firamono';
+  font-size: 0.8rem;
+  color: $color-nord-white;
+
+  header {
+    width: 100%;
+    height: $size-header;
+    border: none;
+    background-color: transparent;
+    text-align: center;
+    line-height: $size-header;
+    padding: 5px 0;
+  }
+}

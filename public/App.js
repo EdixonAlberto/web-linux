@@ -1,3 +1,5 @@
+import draggable from './static/js/draggable.js'
+
 new Vue({
   el: '#app',
 
@@ -59,5 +61,9 @@ new Vue({
 
   created() {
     this.initDateDynamic()
+  },
+
+  mounted() {
+    draggable({ body: this.$refs.appWindow, header: this.$refs.appHeader })
   }
 })
