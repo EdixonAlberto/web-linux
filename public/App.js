@@ -9,7 +9,8 @@ new Vue({
       date: new Date(),
       desktops: [1, 2, 3],
       desktop: 1,
-      brightness: 8
+      brightness: 8,
+      showWindow: true
     }
   },
 
@@ -64,6 +65,6 @@ new Vue({
   },
 
   mounted() {
-    draggable({ body: this.$refs.appWindow, header: this.$refs.appHeader })
+    draggable(this.$refs.appWindow)
   }
 })

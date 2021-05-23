@@ -1,45 +1,63 @@
-export default function draggable(window) {
-  const ball = window.body
+export default function draggable(appWindow) {
+  const appHeader = appWindow.children[0]
 
-  /*
-    Esto es porque el navegador tiene su propio soporte para arrastrar y soltar para imágenes
-    y otros elementos. Se ejecuta automáticamente y entra en conflicto con el nuestro.
-  */
-  ball.ondragstart = () => false
+  // Se desactiva el soporte de arrastre nativo del navegador,
+  // y de esta manera no entre en conflicto con el manipulado.
+  appWindow.ondragstart = () => false
 
-  window.header.onmousedown = event => {
-    // (1) preparar para mover: hacerlo absoluto y ponerlo sobre todo con el z-index
-    // ball.style.position = 'absolute'
-    // ball.style.zIndex = 1000
+  // Se manipula el evento de arrastre al seleccionar el header de la ventana
+  appHeader.onmousedown = event => {
+    const buttons = appHeader.children[2]
+    const heightHeader = 30
+    const shiftX = event.clientX - appWindow.getBoundingClientRect().left
+    const shiftY = event.clientY - appWindow.getBoundingClientRect().top
+    const main = document.querySelector('main')
 
-    // quitar cualquier padre actual y moverlo directamente a body
-    // para posicionarlo relativo al body
-    document.querySelector('main').append(ball)
+    // TEST:
+    // console.log(
+    //   event,
+    //   event.layerX,
+    //   event.clientX,
+    //   appHeader.clientWidth - buttons.clientWidth
+    // )
 
-    // centrar la pelota en las coordenadas (pageX, pageY)
-
-    let shiftX = event.clientX - ball.getBoundingClientRect().left
-    let shiftY = event.clientY - ball.getBoundingClientRect().top
-
-    const moveAt = (pageX, pageY) => {
-      ball.style.left = pageX - shiftX + 'px'
-      ball.style.top = pageY - shiftY + 'px'
+    // Se descarta la zona de los botones en el header
+    if (event.layerX > appHeader.clientWidth - buttons.clientWidth) {
+      return false
     }
 
-    // mover nuestra pelota posicionada absolutamente bajo el puntero
-    // moveAt(event.pageX, event.pageY)
+    // Quitar cualquier padre actual y posicionarlo relativo al main
+    main.append(appWindow)
+
+    // Centrar la ventana en las coordenadas (pageX, pageY)
+    const moveAt = (pageX, pageY) => {
+      const windowWidth = pageX - shiftX + appWindow.clientWidth
+      const windowHeight = pageY - shiftY + appWindow.clientHeight - heightHeader
+
+      if (pageX - shiftX > 0 && windowWidth < window.screen.width) {
+        appWindow.style.left = pageX - shiftX + 'px'
+      }
+
+      if (pageY > heightHeader + shiftY && windowHeight < main.clientHeight) {
+        appWindow.style.top = pageY - shiftY + 'px'
+      }
+    }
+
+    // Mover nuestra ventana posicionada absolutamente bajo el puntero
+    moveAt(event.pageX, event.pageY)
 
     const onMouseMove = event => {
       moveAt(event.pageX, event.pageY)
+      return false
     }
 
-    // (2) mover la pelota con mousemove
+    // Mover la ventana con mousemove
     document.addEventListener('mousemove', onMouseMove)
 
-    // (3) soltar la pelota, quitar cualquier manejador de eventos innecesario
-    ball.onmouseup = () => {
+    // Al soltar la ventana quitar cualquier manejador de eventos innecesario
+    appWindow.onmouseup = () => {
       document.removeEventListener('mousemove', onMouseMove)
-      ball.onmouseup = null
+      appWindow.onmouseup = null
     }
   }
 }

@@ -67,7 +67,7 @@
               <i class="fa fa fa-folder" aria-hidden="true"></i>
             </li>
 
-            <li class="box">
+            <li class="box" @click="showWindow = true">
               <i class="fa fa-terminal" aria-hidden="true"></i>
             </li>
 
@@ -184,8 +184,20 @@
           </ul>
         </section>
 
-        <div ref="appWindow" class="window">
-          <header ref="appHeader">~/home/alisson</header>
+        <div v-show="showWindow" ref="appWindow" class="app-window">
+          <header>
+            <div class="separator"></div>
+
+            <span>~/home/alisson</span>
+
+            <div class="buttons">
+              <span @click="showWindow = false"></span>
+              <span></span>
+              <span @click="showWindow = false"></span>
+            </div>
+          </header>
+
+          <div class="body">body</div>
         </div>
       </main>
     </div>

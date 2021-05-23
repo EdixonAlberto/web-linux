@@ -1,11 +1,11 @@
 $size-header: 20px;
 
-.window {
+.app-window {
   width: 680px;
   height: 480px;
 
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   background-color: $color-nord-black;
 
   position: absolute;
@@ -19,10 +19,39 @@ $size-header: 20px;
   header {
     width: 100%;
     height: $size-header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+
     border: none;
     background-color: transparent;
     text-align: center;
     line-height: $size-header;
-    padding: 5px 0;
+
+    .separator {
+      margin-left: 20px;
+    }
+
+    .buttons {
+      height: 100%;
+      margin-right: 10px;
+
+      span {
+        cursor: pointer;
+        width: 18px;
+        height: 18px;
+        display: inline-block;
+
+        border: none;
+        border-radius: 50%;
+        background-color: $color-nord-grey;
+      }
+    }
+  }
+
+  .body {
+    padding: 20px;
+    padding-top: 0;
   }
 }
