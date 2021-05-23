@@ -58,8 +58,8 @@
         ></div>
 
         <section class="widget-side">
-          <ul class="apps">
-            <li class="box" :class="{ active: true }">
+          <ul class="apps" :class="{ visible: !maxWindow }">
+            <li class="box">
               <i class="fa fa-firefox" aria-hidden="true"></i>
             </li>
 
@@ -67,7 +67,7 @@
               <i class="fa fa fa-folder" aria-hidden="true"></i>
             </li>
 
-            <li class="box" @click="showWindow = true">
+            <li class="box" :class="{ active: showWindow }" @click="showWindow = true">
               <i class="fa fa-terminal" aria-hidden="true"></i>
             </li>
 
@@ -169,7 +169,7 @@
         </section>
 
         <section class="widget-side">
-          <ul class="power">
+          <ul class="power" :class="{ visible: !maxWindow }">
             <li class="box">
               <i class="fa fa-power-off" aria-hidden="true"></i>
             </li>
@@ -184,7 +184,11 @@
           </ul>
         </section>
 
-        <div v-show="showWindow" ref="appWindow" class="app-window">
+        <div
+          ref="appWindow"
+          class="app-window"
+          :class="{'show': showWindow, 'maximize-window' : maxWindow}"
+        >
           <header>
             <div class="separator"></div>
 
@@ -192,12 +196,14 @@
 
             <div class="buttons">
               <span @click="showWindow = false"></span>
-              <span></span>
+              <span @click="maximize"></span>
               <span @click="showWindow = false"></span>
             </div>
           </header>
 
-          <div class="body">body</div>
+          <div class="body">
+            <textarea autocomplete="off" autofocus></textarea>
+          </div>
         </div>
       </main>
     </div>

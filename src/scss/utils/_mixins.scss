@@ -1,0 +1,22 @@
+/********************************** SCROOLL DESIGN **************************************/
+
+@mixin scroll-custom {
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    height: 150px;
+    background-color: rgba($color: $color-nord-yellow, $alpha: 0.8);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: $color-nord-grey;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    cursor: default;
+    background-color: $color-nord-yellow;
+  }
+}

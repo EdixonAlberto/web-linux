@@ -10,7 +10,8 @@ new Vue({
       desktops: [1, 2, 3],
       desktop: 1,
       brightness: 8,
-      showWindow: true
+      showWindow: true,
+      maxWindow: false
     }
   },
 
@@ -57,6 +58,11 @@ new Vue({
 
     openDircord() {
       window.open('https://discord.com/app', 'newwindow', 'width=700,height=600')
+    },
+
+    maximize() {
+      this.$refs.appWindow.style.transition = 'all 0.15s ease-in-out'
+      this.maxWindow = !this.maxWindow
     }
   },
 

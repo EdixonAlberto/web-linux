@@ -34,7 +34,7 @@ export default function draggable(appWindow) {
       const windowWidth = pageX - shiftX + appWindow.clientWidth
       const windowHeight = pageY - shiftY + appWindow.clientHeight - heightHeader
 
-      if (pageX - shiftX > 0 && windowWidth < window.screen.width) {
+      if (pageX - shiftX > 0 && windowWidth < main.clientWidth) {
         appWindow.style.left = pageX - shiftX + 'px'
       }
 
@@ -47,6 +47,7 @@ export default function draggable(appWindow) {
     moveAt(event.pageX, event.pageY)
 
     const onMouseMove = event => {
+      appWindow.style.transition = 'none'
       moveAt(event.pageX, event.pageY)
       return false
     }
