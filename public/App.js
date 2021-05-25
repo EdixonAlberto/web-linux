@@ -1,5 +1,41 @@
 import draggable from './static/js/draggable.js'
 
+Vue.component('AppWindow', {
+  template: '#app-window',
+
+  props: {
+    window: {
+      type: Object,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      showWindow: true,
+      maxWindow: false
+    }
+  },
+
+  methods: {
+    maximize() {
+      this.$refs.appWindow.style.transition = 'all 0.15s ease-in-out'
+      this.maxWindow = !this.maxWindow
+      this.$emit('maximized-window')
+    }
+  },
+
+  watch: {
+    showWindow(val) {
+      this.show = val
+    }
+  },
+
+  mounted() {
+    draggable(this.$refs.appWindow)
+  }
+})
+
 new Vue({
   el: '#app',
 
@@ -10,8 +46,8 @@ new Vue({
       desktops: [1, 2, 3],
       desktop: 1,
       brightness: 8,
-      showWindow: true,
-      maxWindow: false
+      isMaximizedWindow: false,
+      appWindowList: []
     }
   },
 
@@ -60,17 +96,23 @@ new Vue({
       window.open('https://discord.com/app', 'newwindow', 'width=700,height=600')
     },
 
-    maximize() {
-      this.$refs.appWindow.style.transition = 'all 0.15s ease-in-out'
-      this.maxWindow = !this.maxWindow
+    createAppWindow(window) {
+      this.appWindowList.push({
+        ...window,
+        id: this.appWindowList.length
+      })
+    },
+
+    deleteAppWindow(windowId) {
+      console.log(windowId)
+      const res = this.appWindowList.filter(appWindow => appWindow.id !== windowId)
+
+      console.log(res)
+      this.appWindowList = res
     }
   },
 
   created() {
     this.initDateDynamic()
-  },
-
-  mounted() {
-    draggable(this.$refs.appWindow)
   }
 })

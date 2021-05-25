@@ -8,7 +8,7 @@ $size-window-h: 480px;
   height: $size-window-h;
   display: none;
 
-  border: none;
+  border: 1px solid $color-nord-grey;
   border-radius: $size-radius;
   background-color: $color-nord-black;
 
@@ -32,6 +32,7 @@ $size-window-h: 480px;
     top: $size-header !important;
     left: 0 !important;
     border-radius: 0;
+    z-index: $z-index-window + 1;
   }
 
   header {
@@ -93,6 +94,22 @@ $size-window-h: 480px;
 
       &:focus {
         outline: none;
+      }
+    }
+  }
+
+  &:focus-within {
+    z-index: $z-index-window + 1;
+
+    header .buttons span {
+      &:nth-child(1) {
+        background-color: $color-nord-green;
+      }
+      &:nth-child(2) {
+        background-color: $color-nord-yellow;
+      }
+      &:nth-child(3) {
+        background-color: $color-nord-red;
       }
     }
   }

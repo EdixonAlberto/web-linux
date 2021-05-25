@@ -58,7 +58,7 @@
         ></div>
 
         <section class="widget-side">
-          <ul class="apps" :class="{ visible: !maxWindow }">
+          <ul class="apps" :class="{ 'z-visible': !isMaximizedWindow }">
             <li class="box">
               <i class="fa fa-firefox" aria-hidden="true"></i>
             </li>
@@ -67,7 +67,12 @@
               <i class="fa fa fa-folder" aria-hidden="true"></i>
             </li>
 
-            <li class="box" :class="{ active: showWindow }" @click="showWindow = true">
+            <li
+              class="box"
+              @click="createAppWindow({
+                type: 'terminal'
+              })"
+            >
               <i class="fa fa-terminal" aria-hidden="true"></i>
             </li>
 
@@ -86,7 +91,7 @@
           </ul>
         </section>
 
-        <section class="widget-center">
+        <section v-show="desktop === 1" class="widget-center">
           <div class="col">
             <div class="row avatar">
               <div>
@@ -168,8 +173,8 @@
           </div>
         </section>
 
-        <section class="widget-side">
-          <ul class="power" :class="{ visible: !maxWindow }">
+        <section v-show="desktop === 1" class="widget-side">
+          <ul class="power">
             <li class="box">
               <i class="fa fa-power-off" aria-hidden="true"></i>
             </li>
@@ -184,29 +189,50 @@
           </ul>
         </section>
 
-        <div
-          ref="appWindow"
-          class="app-window"
-          :class="{'show': showWindow, 'maximize-window' : maxWindow}"
-        >
-          <header>
-            <div class="separator"></div>
-
-            <span>~/home/alisson</span>
-
-            <div class="buttons">
-              <span @click="showWindow = false"></span>
-              <span @click="maximize"></span>
-              <span @click="showWindow = false"></span>
-            </div>
-          </header>
-
-          <div class="body">
-            <textarea autocomplete="off" autofocus></textarea>
-          </div>
-        </div>
+        <app-window
+          v-for="(appWindow, i) of appWindowList"
+          :key="i"
+          :window="appWindow"
+          @deleted-window="deleteAppWindow($event)"
+          @maximized-window="isMaximizedWindow=true"
+        />
       </main>
     </div>
+
+    <template id="app-window">
+      <div
+        :ref="`appWindow`"
+        class="app-window"
+        :class="{'show': showWindow, 'maximize-window' : maxWindow}"
+      >
+        <header>
+          <div class="separator"></div>
+
+          <span>~/home/alisson</span>
+
+          <div class="buttons">
+            <span></span>
+            <span @click="maximize"></span>
+            <span @click="$emit('deleted-window', window.id)"></span>
+          </div>
+        </header>
+
+        <div class="body">
+          <!-- TODO: eliminar texto luego de terminar de probar la funcionalidad de las ventanas -->
+          <span style="font-size: 40px; color: white; position: absolute">
+            {{ window.id }}
+          </span>
+
+          <textarea
+            v-if="window.type === 'terminal'"
+            autocomplete="off"
+            autofocus
+          ></textarea>
+
+          <div v-else-if="window.type === 'browser'">Browser</div>
+        </div>
+      </div>
+    </template>
 
     <!-- VUE-PRODUCTION -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
