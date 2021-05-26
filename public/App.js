@@ -97,6 +97,7 @@ new Vue({
     },
 
     createAppWindow(window) {
+      // TODO: probar con otra estructura de datos
       this.appWindowList.push({
         ...window,
         id: this.appWindowList.length
@@ -104,11 +105,9 @@ new Vue({
     },
 
     deleteAppWindow(windowId) {
-      console.log(windowId)
-      const res = this.appWindowList.filter(appWindow => appWindow.id !== windowId)
-
-      console.log(res)
-      this.appWindowList = res
+      this.appWindowList = this.appWindowList.map(appWindow => {
+        return appWindow?.id !== windowId ? appWindow : null
+      })
     }
   },
 

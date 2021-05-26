@@ -189,13 +189,16 @@
           </ul>
         </section>
 
-        <app-window
-          v-for="(appWindow, i) of appWindowList"
-          :key="i"
-          :window="appWindow"
-          @deleted-window="deleteAppWindow($event)"
-          @maximized-window="isMaximizedWindow=true"
-        />
+        <template>
+          <div v-for="(appWindow, i) of appWindowList" :key="i">
+            <app-window
+              v-if="appWindow"
+              :window="appWindow"
+              @deleted-window="deleteAppWindow($event)"
+              @maximized-window="isMaximizedWindow = !isMaximizedWindow"
+            />
+          </div>
+        </template>
       </main>
     </div>
 
