@@ -17,9 +17,6 @@ export default function draggable(appWindow) {
     // Se descarta la zona de los botones en el header
     if (isMouseOnHeader) return true
 
-    // Quitar cualquier padre actual y posicionarlo relativo al main
-    main.append(appWindow)
-
     // Mover nuestra ventana posicionada absolutamente bajo el puntero
     const onMouseMove = event => {
       /*

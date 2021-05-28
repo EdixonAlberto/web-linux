@@ -190,20 +190,20 @@
         </section>
 
         <template>
-          <div v-for="(appWindow, i) of appWindowList" :key="i">
-            <app-window
-              v-if="appWindow"
-              :window="appWindow"
-              @deleted-window="deleteAppWindow($event)"
-              @maximized-window="isMaximizedWindow = !isMaximizedWindow"
-            />
-          </div>
+          <app-window
+            v-for="(appWindow, i) of appWindowList"
+            :key="i"
+            :window="appWindow"
+            @deleted-window="deleteAppWindow($event)"
+            @maximized-window="isMaximizedWindow = !isMaximizedWindow"
+          />
         </template>
       </main>
     </div>
 
     <template id="app-window">
       <div
+        v-if="window"
         :ref="`appWindow`"
         class="app-window"
         :class="{'show': showWindow, 'maximize-window' : maxWindow}"
