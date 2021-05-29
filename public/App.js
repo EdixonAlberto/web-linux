@@ -4,7 +4,7 @@ Vue.component('AppWindow', {
   template: '#app-window',
 
   props: {
-    window: {
+    dataWindow: {
       type: Object,
       required: true
     }
@@ -13,15 +13,52 @@ Vue.component('AppWindow', {
   data() {
     return {
       showWindow: true,
-      maxWindow: false
+      maximizeWindow: false
+    }
+  },
+
+  computed: {
+    styleCustom() {
+      return {
+        zIndex: 1000 + this.dataWindow.z,
+        ...(this.dataWindow.position
+          ? {
+              left: this.dataWindow.position.left,
+              top: this.dataWindow.position.top
+            }
+          : null)
+      }
     }
   },
 
   methods: {
     maximize() {
       this.$refs.appWindow.style.transition = 'all 0.15s ease-in-out'
-      this.maxWindow = !this.maxWindow
+      this.maximizeWindow = !this.maximizeWindow
       this.$emit('maximized-window')
+    },
+
+    updateFocus() {
+      const newAppWindow = {
+        ...this.dataWindow,
+        focus: !this.dataWindow.focus
+      }
+
+      this.$emit('update-window', newAppWindow)
+    },
+
+    updatePosition() {
+      const appWindow = this.$refs.appWindow
+
+      const newAppWindow = {
+        ...this.dataWindow,
+        position: {
+          left: appWindow.style.left,
+          top: appWindow.style.top
+        }
+      }
+
+      this.$emit('update-window', newAppWindow)
     }
   },
 
@@ -93,20 +130,55 @@ new Vue({
     },
 
     openDircord() {
-      window.open('https://discord.com/app', 'newwindow', 'width=700,height=600')
+      open('https://discord.com/app', 'newwindow', 'width=700,height=600')
     },
 
-    createAppWindow(window) {
-      // TODO: probar con otra estructura de datos
-      this.appWindowList.push({
-        ...window,
-        id: this.appWindowList.length
+    createAppWindow() {
+      const hiddendWindowFound = this.appWindowList.find(
+        appWindow => appWindow.focus === false
+      )
+
+      if (hiddendWindowFound) {
+        this.appWindowList = this.appWindowList.map(appWindow => ({
+          ...appWindow,
+          focus: true
+        }))
+      } else {
+        if (this.appWindowList.length < 5) {
+          const appWindowList = this.appWindowList.map(appWindow => ({
+            ...appWindow,
+            z: 0,
+            focus: true
+          }))
+
+          // TODO: probar con otra estructura de datos
+          appWindowList.push({
+            id: this.appWindowList.length,
+            z: 4,
+            focus: true
+          })
+
+          this.appWindowList = appWindowList
+        } else alert('Maximo de ventanas permitidas alcanzado')
+      }
+    },
+
+    deleteAppWindow(appWindowId) {
+      this.appWindowList = this.appWindowList.filter(
+        appWindow => appWindow.id !== appWindowId
+      )
+    },
+
+    updateDistributionWindow(newAppWindow) {
+      this.appWindowList.forEach(appWindow => {
+        if (newAppWindow.id === appWindow.id) appWindow.z = 4
+        else if (appWindow.z > 0) appWindow.z -= 1
       })
     },
 
-    deleteAppWindow(windowId) {
-      this.appWindowList = this.appWindowList.map(appWindow => {
-        return appWindow?.id !== windowId ? appWindow : null
+    updateWindow(appWindow) {
+      this.appWindowList = this.appWindowList.map(item => {
+        return item.id === appWindow.id ? appWindow : item
       })
     }
   },

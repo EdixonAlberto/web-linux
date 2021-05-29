@@ -1,7 +1,21 @@
 $size-header: 30px;
 $size-radius: 8px;
-$size-window-w: 680px;
-$size-window-h: 480px;
+$size-window-w: calc(100vw / 2);
+$size-window-h: calc(100vh / 2 - #{$size-header / 2});
+
+%active-buttons {
+  span {
+    &:nth-child(1) {
+      background-color: $color-nord-green;
+    }
+    &:nth-child(2) {
+      background-color: $color-nord-yellow;
+    }
+    &:nth-child(3) {
+      background-color: $color-nord-red;
+    }
+  }
+}
 
 .app-window {
   width: $size-window-w;
@@ -13,27 +27,34 @@ $size-window-h: 480px;
   background-color: $color-nord-black;
 
   position: absolute;
-  top: calc(50% - (#{$size-window-h} / 2) + #{$height-header});
-  left: calc(50% - (#{$size-window-w} / 2));
+
+  &.quadrant1 {
+    top: $size-header;
+    left: 0;
+  }
+  &.quadrant2 {
+    top: $size-header;
+    right: 0;
+  }
+  &.quadrant3 {
+    bottom: 0;
+    left: 0;
+  }
+  &.quadrant4 {
+    bottom: 0;
+    right: 0;
+  }
+  &.quadrant5 {
+    top: calc(50% - (#{$size-window-h} / 2) + #{$height-header});
+    left: calc(50% - (#{$size-window-w} / 2));
+  }
+
   z-index: $z-index-window;
 
   font-family: 'Firamono';
   font-size: 0.8rem;
   color: $color-nord-white;
   $padding-header: 10px;
-
-  &.show {
-    display: block;
-  }
-
-  &.maximize-window {
-    width: 100%;
-    height: calc(100% - #{$height-header});
-    top: $size-header !important;
-    left: 0 !important;
-    border-radius: 0;
-    z-index: $z-index-window + 1;
-  }
 
   header {
     width: 100%;
@@ -70,6 +91,10 @@ $size-window-h: 480px;
         border-radius: 50%;
         background-color: $color-nord-grey;
       }
+
+      &:hover {
+        @extend %active-buttons;
+      }
     }
   }
 
@@ -98,19 +123,20 @@ $size-window-h: 480px;
     }
   }
 
-  &:focus-within {
-    z-index: $z-index-window + 1;
+  &.show {
+    display: block;
+  }
 
-    header .buttons span {
-      &:nth-child(1) {
-        background-color: $color-nord-green;
-      }
-      &:nth-child(2) {
-        background-color: $color-nord-yellow;
-      }
-      &:nth-child(3) {
-        background-color: $color-nord-red;
-      }
-    }
+  &.maximize {
+    width: 100%;
+    height: calc(100% - #{$height-header});
+    top: $size-header !important;
+    left: 0 !important;
+    border-radius: 0;
+    z-index: $z-index-window + 1;
+  }
+
+  &.focus header .buttons {
+    @extend %active-buttons;
   }
 }

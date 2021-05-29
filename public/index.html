@@ -189,50 +189,58 @@
           </ul>
         </section>
 
-        <template>
-          <app-window
-            v-for="(appWindow, i) of appWindowList"
-            :key="i"
-            :window="appWindow"
-            @deleted-window="deleteAppWindow($event)"
-            @maximized-window="isMaximizedWindow = !isMaximizedWindow"
-          />
-        </template>
+        <app-window
+          v-for="(appWindow, i) of appWindowList"
+          :key="i"
+          :data-window="appWindow"
+          @deleted-window="deleteAppWindow($event)"
+          @maximized-window="isMaximizedWindow = !isMaximizedWindow"
+          @distribution-window="updateDistributionWindow($event)"
+          @update-window="updateWindow($event)"
+        />
       </main>
     </div>
 
     <template id="app-window">
       <div
-        v-if="window"
-        :ref="`appWindow`"
+        v-if="dataWindow"
+        v-show="dataWindow.focus"
+        ref="appWindow"
         class="app-window"
-        :class="{'show': showWindow, 'maximize-window' : maxWindow}"
+        :class="[
+          `quadrant${dataWindow.id + 1}`,
+          showWindow && 'show',
+          maximizeWindow && 'maximize',
+          dataWindow.z === 4 && 'focus'
+        ]"
+        :style="styleCustom"
+        @mousedown="$emit('distribution-window', dataWindow)"
       >
-        <header>
+        <header @click="updatePosition">
           <div class="separator"></div>
 
           <span>~/home/alisson</span>
 
           <div class="buttons">
-            <span></span>
+            <span @click="updateFocus"></span>
             <span @click="maximize"></span>
-            <span @click="$emit('deleted-window', window.id)"></span>
+            <span @click="$emit('deleted-window', dataWindow.id)"></span>
           </div>
         </header>
 
         <div class="body">
           <!-- TODO: eliminar texto luego de terminar de probar la funcionalidad de las ventanas -->
           <span style="font-size: 40px; color: white; position: absolute">
-            {{ window.id }}
+            {{ dataWindow.id + 1 }}
           </span>
 
           <textarea
-            v-if="window.type === 'terminal'"
+            v-if="dataWindow.type === 'terminal'"
             autocomplete="off"
             autofocus
           ></textarea>
 
-          <div v-else-if="window.type === 'browser'">Browser</div>
+          <div v-else-if="dataWindow.type === 'browser'">Browser</div>
         </div>
       </div>
     </template>
