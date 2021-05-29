@@ -21,12 +21,7 @@ Vue.component('AppWindow', {
     styleCustom() {
       return {
         zIndex: 1000 + this.dataWindow.z,
-        ...(this.dataWindow.position
-          ? {
-              left: this.dataWindow.position.left,
-              top: this.dataWindow.position.top
-            }
-          : null)
+        ...this.dataWindow.position
       }
     }
   },
@@ -47,24 +42,23 @@ Vue.component('AppWindow', {
       this.$emit('update-window', newAppWindow)
     },
 
-    updatePosition() {
+    updatePosition(evt) {
+      // TODO: mejorar actualizacion de la posicion por medio del evento
+      // console.log(evt.button, evt.buttons)
+
       const appWindow = this.$refs.appWindow
 
       const newAppWindow = {
         ...this.dataWindow,
         position: {
-          left: appWindow.style.left,
-          top: appWindow.style.top
+          top: appWindow.style.top,
+          right: appWindow.style.right,
+          bottom: appWindow.style.bottom,
+          left: appWindow.style.left
         }
       }
 
       this.$emit('update-window', newAppWindow)
-    }
-  },
-
-  watch: {
-    showWindow(val) {
-      this.show = val
     }
   },
 
@@ -133,7 +127,31 @@ new Vue({
       open('https://discord.com/app', 'newwindow', 'width=700,height=600')
     },
 
-    createAppWindow() {
+    getId() {
+      return new Date().getTime().toString().substr(-3)
+    },
+
+    getPosition(quadrant) {
+      const sizeHeader = '30px'
+
+      switch (quadrant) {
+        case 0:
+          return { top: sizeHeader, left: '0' }
+        case 1:
+          return { top: sizeHeader, right: '0' }
+        case 2:
+          return { bottom: '0', left: '0' }
+        case 3:
+          return { bottom: '0', right: '0' }
+        case 4:
+          return {
+            top: `calc(50% - (100vh / 2 - ${sizeHeader} / 2) / 2 + ${sizeHeader})`,
+            left: `calc(50% - (100vw / 2) / 2)`
+          }
+      }
+    },
+
+    createAppWindow(newAppWindow) {
       const hiddendWindowFound = this.appWindowList.find(
         appWindow => appWindow.focus === false
       )
@@ -153,13 +171,15 @@ new Vue({
 
           // TODO: probar con otra estructura de datos
           appWindowList.push({
-            id: this.appWindowList.length,
+            ...newAppWindow,
+            id: this.getId(),
             z: 4,
-            focus: true
+            focus: true,
+            position: this.getPosition(this.appWindowList.length)
           })
 
           this.appWindowList = appWindowList
-        } else alert('Maximo de ventanas permitidas alcanzado')
+        } else alert('Maximo nro de ventanas alcanzado')
       }
     },
 

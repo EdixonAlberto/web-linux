@@ -1,7 +1,5 @@
 $size-header: 30px;
 $size-radius: 8px;
-$size-window-w: calc(100vw / 2);
-$size-window-h: calc(100vh / 2 - #{$size-header / 2});
 
 %active-buttons {
   span {
@@ -18,38 +16,15 @@ $size-window-h: calc(100vh / 2 - #{$size-header / 2});
 }
 
 .app-window {
-  width: $size-window-w;
-  height: $size-window-h;
+  width: calc(100vw / 2);
+  height: calc(100vh / 2 - #{$size-header / 2});
   display: none;
+  position: absolute;
+  z-index: $z-index-window;
 
   border: 1px solid $color-nord-grey;
   border-radius: $size-radius;
   background-color: $color-nord-black;
-
-  position: absolute;
-
-  &.quadrant1 {
-    top: $size-header;
-    left: 0;
-  }
-  &.quadrant2 {
-    top: $size-header;
-    right: 0;
-  }
-  &.quadrant3 {
-    bottom: 0;
-    left: 0;
-  }
-  &.quadrant4 {
-    bottom: 0;
-    right: 0;
-  }
-  &.quadrant5 {
-    top: calc(50% - (#{$size-window-h} / 2) + #{$height-header});
-    left: calc(50% - (#{$size-window-w} / 2));
-  }
-
-  z-index: $z-index-window;
 
   font-family: 'Firamono';
   font-size: 0.8rem;
@@ -63,7 +38,6 @@ $size-window-h: calc(100vh / 2 - #{$size-header / 2});
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     border: none;
     background-color: transparent;
     text-align: center;

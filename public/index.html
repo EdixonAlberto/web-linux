@@ -203,16 +203,14 @@
 
     <template id="app-window">
       <div
-        v-if="dataWindow"
         v-show="dataWindow.focus"
         ref="appWindow"
         class="app-window"
-        :class="[
-          `quadrant${dataWindow.id + 1}`,
-          showWindow && 'show',
-          maximizeWindow && 'maximize',
-          dataWindow.z === 4 && 'focus'
-        ]"
+        :class="{
+          show: showWindow,
+          maximize: maximizeWindow,
+          focus: dataWindow.z === 4
+        }"
         :style="styleCustom"
         @mousedown="$emit('distribution-window', dataWindow)"
       >
@@ -231,7 +229,7 @@
         <div class="body">
           <!-- TODO: eliminar texto luego de terminar de probar la funcionalidad de las ventanas -->
           <span style="font-size: 40px; color: white; position: absolute">
-            {{ dataWindow.id + 1 }}
+            {{ dataWindow.id }}
           </span>
 
           <textarea
