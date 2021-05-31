@@ -74,25 +74,36 @@ $size-radius: 8px;
 
   .body {
     width: auto;
-    height: calc(100% - #{$size-header} - 40px);
-    padding: 20px;
+    height: calc(100% - #{$size-header});
+    position: relative;
 
-    textarea {
-      width: 100%;
+    & > div {
       height: 100%;
-      overflow-y: scroll;
-      @include scroll-custom;
+      width: 100%;
 
-      border: none;
-      border-radius: $size-radius;
-      background-color: transparent;
+      iframe {
+        height: 100%;
+        width: 100%;
+      }
 
-      font-size: 0.9rem;
-      color: $color-nord-blue;
-      resize: none;
+      &#terminal textarea {
+        width: calc(100% - 20px);
+        height: calc(100% - 20px);
+        padding: 10px;
+        overflow-y: scroll;
+        @include scroll-custom;
 
-      &:focus {
-        outline: none;
+        border: none;
+        border-radius: $size-radius;
+        background-color: transparent;
+
+        font-size: 0.9rem;
+        color: $color-nord-blue;
+        resize: none;
+
+        &:focus {
+          outline: none;
+        }
       }
     }
   }

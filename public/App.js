@@ -1,5 +1,7 @@
 import draggable from './static/js/draggable.js'
 
+Vue.use(VSwitch)
+
 Vue.component('AppWindow', {
   template: '#app-window',
 
@@ -152,34 +154,34 @@ new Vue({
     },
 
     createAppWindow(newAppWindow) {
-      const hiddendWindowFound = this.appWindowList.find(
-        appWindow => appWindow.focus === false
-      )
+      const windowNotRepeted = !this.appWindowList.length
+        ? true
+        : !this.appWindowList.some(appWindow => appWindow.type === newAppWindow.type)
 
-      if (hiddendWindowFound) {
-        this.appWindowList = this.appWindowList.map(appWindow => ({
+      if (windowNotRepeted) {
+        const appWindowList = this.appWindowList.map(appWindow => ({
           ...appWindow,
-          focus: true
+          z: 0
         }))
+
+        appWindowList.push({
+          ...newAppWindow,
+          id: this.getId(),
+          z: 4,
+          focus: true,
+          position: this.getPosition(this.appWindowList.length)
+        })
+
+        this.appWindowList = appWindowList
       } else {
-        if (this.appWindowList.length < 5) {
-          const appWindowList = this.appWindowList.map(appWindow => ({
-            ...appWindow,
-            z: 0,
-            focus: true
-          }))
-
-          // TODO: probar con otra estructura de datos
-          appWindowList.push({
-            ...newAppWindow,
-            id: this.getId(),
-            z: 4,
-            focus: true,
-            position: this.getPosition(this.appWindowList.length)
-          })
-
-          this.appWindowList = appWindowList
-        } else alert('Maximo nro de ventanas alcanzado')
+        this.appWindowList = this.appWindowList.map(appWindow => {
+          return appWindow.type === newAppWindow.type
+            ? {
+                ...appWindow,
+                focus: !appWindow.focus
+              }
+            : appWindow
+        })
       }
     },
 
