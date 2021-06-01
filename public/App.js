@@ -15,7 +15,9 @@ Vue.component('AppWindow', {
   data() {
     return {
       showWindow: true,
-      maximizeWindow: false
+      maximizeWindow: false,
+      browserInput: 'https://www.google.com',
+      browserUrl: 'https://www.google.com/webhp?igu=1'
     }
   },
 
@@ -61,6 +63,15 @@ Vue.component('AppWindow', {
       }
 
       this.$emit('update-window', newAppWindow)
+    },
+
+    setBrowserUrl(input = '') {
+      let inputUrl = input || this.browserInput
+      this.browserInput = `https://${inputUrl}`
+
+      inputUrl =
+        inputUrl.search(/^google.com$/) > -1 ? 'google.com/webhp?igu=1' : inputUrl
+      this.browserUrl = `https://${inputUrl}`
     }
   },
 

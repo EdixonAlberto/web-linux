@@ -235,8 +235,8 @@
               <div class="navegation">
                 <i class="fa fa-arrow-circle-left"></i>
                 <i class="fa fa-arrow-circle-right"></i>
-                <i class="fa fa-repeat"></i>
-                <i class="fa fa-home" @click=""></i>
+                <i class="fa fa-repeat" @click="setBrowserUrl()"></i>
+                <i class="fa fa-home" @click="setBrowserUrl('google.com')"></i>
               </div>
 
               <div class="input">
@@ -246,7 +246,11 @@
                   <i class="fa fa-lock"></i>
                 </div>
 
-                <input type="text" value="https://www.google.com" />
+                <input
+                  type="text"
+                  v-model="browserInput"
+                  @keyup.enter="setBrowserUrl()"
+                />
               </div>
 
               <div class="menu">
@@ -256,8 +260,7 @@
               </div>
             </div>
 
-          <div id="browser" v-case="'browser'">
-            <iframe src="https://www.google.com/webhp?igu=1" frameborder="0"></iframe>
+            <iframe :src="this.browserUrl" frameborder="0"></iframe>
           </div>
 
           <div id="terminal" v-case="'terminal'">
