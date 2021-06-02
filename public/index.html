@@ -197,7 +197,7 @@
         <header @click="updatePosition">
           <div class="separator"></div>
 
-          <span v-text="dataWindow.name"></span>
+          <span v-text="dataWindow.title"></span>
 
           <div class="buttons">
             <span @click="updateFocus"></span>
@@ -248,7 +248,7 @@
             <textarea autocomplete="off"></textarea>
           </div>
 
-          <div id="web" v-case="'vscode'">
+          <div id="web" v-case="'web'">
             <iframe :src="dataWindow.link" frameborder="0"></iframe>
           </div>
         </div>
