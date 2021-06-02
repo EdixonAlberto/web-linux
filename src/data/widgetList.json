@@ -8,14 +8,14 @@
   },
   {
     "window": {
-      "title": "",
+      "title": "Explorer - IN PROGRESS",
       "type": "folder"
     },
     "iconHtml": "<i class='fa fa-folder' aria-hidden='true'></i>"
   },
   {
     "window": {
-      "title": "Terminal",
+      "title": "Terminal - IN PROGRESS",
       "type": "terminal"
     },
     "iconHtml": "<i class='fa fa-terminal' aria-hidden='true'></i>"

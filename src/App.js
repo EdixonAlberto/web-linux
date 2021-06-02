@@ -218,6 +218,13 @@ new Vue({
       this.appWindowList = this.appWindowList.map(item => {
         return item.id === appWindow.id ? appWindow : item
       })
+    },
+
+    isWidgetActived(windowType) {
+      const widgetIndex = this.appWindowList.findIndex(
+        appWindow => appWindow.type === windowType
+      )
+      return widgetIndex > -1
     }
   },
 

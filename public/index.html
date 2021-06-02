@@ -63,6 +63,7 @@
               v-for="(widget, i) in widgetList"
               :key="i"
               class="box"
+              :class="{ active: isWidgetActived(widget.window.type) }"
               @click="createAppWindow(widget.window)"
             >
               <span v-html="widget.iconHtml"></span>
