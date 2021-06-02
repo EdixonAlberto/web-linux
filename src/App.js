@@ -68,10 +68,12 @@ Vue.component('AppWindow', {
 
     setBrowserUrl(input = '') {
       let inputUrl = input || this.browserInput
+      const isGoogle = inputUrl.search(/google.com$/) > -1
+
+      inputUrl = isGoogle ? 'www.google.com' : inputUrl
       this.browserInput = `https://${inputUrl}`
 
-      inputUrl =
-        inputUrl.search(/^google.com$/) > -1 ? 'google.com/webhp?igu=1' : inputUrl
+      inputUrl = isGoogle ? 'google.com/webhp?igu=1' : inputUrl
       this.browserUrl = `https://${inputUrl}`
     }
   },
