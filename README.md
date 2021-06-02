@@ -1,5 +1,7 @@
 # Web Liss
 
+![template](./.github/template.jpg)
+
 Personal website that looks like a linux desktop
 
 ### [Go to website](http://skyliss.netlify.app) &#x279c;
