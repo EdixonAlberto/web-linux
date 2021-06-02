@@ -1,12 +1,16 @@
 {
   "name": "web-liss",
-  "version": "0.0.1",
-  "description": "Diosa oaxaqueña",
+  "version": "1.0.0",
+  "description": "Personal website that looks like a linux desktop",
   "license": "UNLICENSED",
   "private": true,
   "keywords": [
     "website",
-    "portfolio"
+    "portfolio",
+    "desktop",
+    "linux",
+    "sass",
+    "vue"
   ],
   "author": {
     "name": "Edixon Piña",
@@ -14,12 +18,14 @@
     "url": "https://www.edixonalberto.com"
   },
   "scripts": {
-    "lint": "prettier --write ./**/*.{html,css,scss,js}",
+    "lint": "prettier --write public/index.html src/**/*.{js,scss}",
     "sass-watch": "sass --watch src/scss/main.scss:public/static/css/main.css",
     "sass-build": "sass --style=compressed --no-source-map src/scss/main.scss:public/static/css/main.css",
     "serve": "live-server ./public --host=localhost --port=5500",
-    "build": "npm run sass-build",
-    "start": "concurrently \"npm run sass-watch\" \"npm run serve\""
+    "bundle": "node tools/createBundle.js",
+    "build": "npm run bundle && npm run sass-build",
+    "js-watch": "nodemon -e js,json -w src --exec \"npm run bundle\"",
+    "start": "concurrently \"npm run sass-watch\" \"npm run js-watch\" \"npm run serve\""
   },
   "repository": {
     "type": "git",
@@ -31,9 +37,20 @@
   "homepage": "https://github.com/EdixonAlberto/web-liss#readme",
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "babelify": "^10.0.0",
+    "browserify": "^17.0.0",
     "concurrently": "^6.1.0",
+    "envify": "^4.1.0",
     "live-server": "^1.2.1",
+    "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "sass": "^1.32.12"
+  },
+  "engines": {
+    "node": "^12.18.0",
+    "npm": "^6.14.0"
   }
 }

@@ -3,4 +3,5 @@ node_modules/
 .vscode/
 
 # FILES
-*/**/css/main.css*
+public/static/css/
+public/static/js/

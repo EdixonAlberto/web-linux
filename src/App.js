@@ -1,4 +1,5 @@
-import draggable from './static/js/draggable.js'
+import draggable from './draggable'
+import widgetList from './data/widgetList.json'
 
 Vue.use(VSwitch)
 
@@ -91,7 +92,8 @@ new Vue({
       desktop: 1,
       brightness: 8,
       isMaximizedWindow: false,
-      appWindowList: []
+      appWindowList: [],
+      widgetList
     }
   },
 
@@ -123,9 +125,10 @@ new Vue({
       const d = this.date
       const hours = d.getHours() < 10 ? '0' + d.getHours() : d.getHours()
       const minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()
+      const days = d.getDate() < 10 ? '0' + d.getDate() : d.getDate()
 
       // prettier-ignore
-      const time = `${weeks[d.getDay()]} ${months[d.getMonth()]} ${d.getMonth()} ${d.getDate()}, ${hours}:${minutes}`
+      const time = `${weeks[d.getDay()]} ${months[d.getMonth()]} ${days}, ${hours}:${minutes}`
 
       return { time, hours, minutes }
     }

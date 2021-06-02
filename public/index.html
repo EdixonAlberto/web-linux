@@ -59,29 +59,13 @@
 
         <section class="widget-side">
           <ul class="apps" :class="{ 'z-visible': !isMaximizedWindow }">
-            <li class="box" @click="createAppWindow({ type: 'browser' })">
-              <i class="fa fa-firefox" aria-hidden="true"></i>
-            </li>
-
-            <li class="box">
-              <i class="fa fa-folder" aria-hidden="true"></i>
-            </li>
-
-            <li class="box" @click="createAppWindow({ type: 'terminal' })">
-              <i class="fa fa-terminal" aria-hidden="true"></i>
-            </li>
-
-            <li class="box" @click="createAppWindow({ type: 'vscode' })">
-              <!-- prettier-ignore -->
-              <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" focusable="false" width="1em" height="1em" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);" preserveAspectRatio="xMidYMid meet" viewBox="0 0 32 32"><path d="M29.01 5.03l-5.766-2.776a1.742 1.742 0 0 0-1.989.338L2.38 19.8a1.166 1.166 0 0 0-.08 1.647c.025.027.05.053.077.077l1.541 1.4a1.165 1.165 0 0 0 1.489.066L28.142 5.75A1.158 1.158 0 0 1 30 6.672v-.067a1.748 1.748 0 0 0-.99-1.575z"/><path d="M29.01 26.97l-5.766 2.777a1.745 1.745 0 0 1-1.989-.338L2.38 12.2a1.166 1.166 0 0 1-.08-1.647c.025-.027.05-.053.077-.077l1.541-1.4A1.165 1.165 0 0 1 5.41 9.01l22.732 17.24A1.158 1.158 0 0 0 30 25.328v.072a1.749 1.749 0 0 1-.99 1.57z"/><path d="M23.244 29.747a1.745 1.745 0 0 1-1.989-.338A1.025 1.025 0 0 0 23 28.684V3.316a1.024 1.024 0 0 0-1.749-.724a1.744 1.744 0 0 1 1.989-.339l5.765 2.772A1.748 1.748 0 0 1 30 6.6v18.8a1.748 1.748 0 0 1-.991 1.576z"/></svg>
-            </li>
-
-            <li class="box">
-              <i class="fa fa-paint-brush" aria-hidden="true"></i>
-            </li>
-
-            <li class="box">
-              <i class="fa fa-spotify" aria-hidden="true"></i>
+            <li
+              v-for="(widget, i) in widgetList"
+              :key="i"
+              class="box"
+              @click="createAppWindow(widget.window)"
+            >
+              <span v-html="widget.iconHtml"></span>
             </li>
           </ul>
         </section>
@@ -212,11 +196,7 @@
         <header @click="updatePosition">
           <div class="separator"></div>
 
-          <div v-switch="dataWindow.type">
-            <span v-case="'browser'">Firefox</span>
-            <span v-case="'terminal'">Terminal</span>
-            <span v-case="'vscode'">Visual Studio Code</span>
-          </div>
+          <span v-text="dataWindow.name"></span>
 
           <div class="buttons">
             <span @click="updateFocus"></span>
@@ -267,11 +247,8 @@
             <textarea autocomplete="off"></textarea>
           </div>
 
-          <div id="vscode" v-case="'vscode'">
-            <iframe
-              src="https://github1s.com/EdixonAlberto/web-liss"
-              frameborder="0"
-            ></iframe>
+          <div id="web" v-case="'vscode'">
+            <iframe :src="dataWindow.link" frameborder="0"></iframe>
           </div>
         </div>
       </div>
@@ -281,11 +258,13 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
     <!-- VUE-DEVELOPMENT -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
     <!-- V-CALENDAR -->
     <script src="https://unpkg.com/v-calendar"></script>
     <!-- V-SWITCH-CASE -->
     <script src="https://unpkg.com/v-switch-case@1.0.2/dist/v-switch.min.js"></script>
-    <!-- APP -->
-    <script src="App.js" type="module"></script>
+
+    <!-- MAIN-JS -->
+    <script src="static/js/main.js"></script>
   </body>
 </html>
