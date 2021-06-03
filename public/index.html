@@ -13,173 +13,180 @@
   </head>
   <body>
     <div id="app">
-      <header>
-        <div class="taskbar">
-          <span class="desktop">
-            <div class="home">
-              <i class="fa fa-home"></i>
-            </div>
+      <div v-if="!isMobile" class="desktop" :style="{ display: 'block' }">
+        <header>
+          <div class="taskbar">
+            <span class="desktop">
+              <div class="home">
+                <i class="fa fa-home"></i>
+              </div>
 
-            <div class="desktop-list">
-              <div
-                v-for="(item, i) of desktops"
+              <div class="desktop-list">
+                <div
+                  v-for="(item, i) of desktops"
+                  :key="i"
+                  class="desktop-card"
+                  :class="{ active: desktop === item }"
+                  @click="desktop = item"
+                >
+                  {{ item }}
+                </div>
+
+                <div
+                  class="desktop-add"
+                  @click="desktops.length < 9 && desktops.push(desktops.length + 1)"
+                >
+                  +
+                </div>
+              </div>
+            </span>
+
+            <div class="date">{{ dateDynamic.time }}</div>
+
+            <div class="tool">
+              <i class="fa fa-desktop" aria-hidden="true"></i>
+              <!-- prettier-ignore -->
+              <svg @click="openDircord" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discord" class="svg-inline--fa fa-discord fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M297.216 243.2c0 15.616-11.52 28.416-26.112 28.416-14.336 0-26.112-12.8-26.112-28.416s11.52-28.416 26.112-28.416c14.592 0 26.112 12.8 26.112 28.416zm-119.552-28.416c-14.592 0-26.112 12.8-26.112 28.416s11.776 28.416 26.112 28.416c14.592 0 26.112-12.8 26.112-28.416.256-15.616-11.52-28.416-26.112-28.416zM448 52.736V512c-64.494-56.994-43.868-38.128-118.784-107.776l13.568 47.36H52.48C23.552 451.584 0 428.032 0 398.848V52.736C0 23.552 23.552 0 52.48 0h343.04C424.448 0 448 23.552 448 52.736zm-72.96 242.688c0-82.432-36.864-149.248-36.864-149.248-36.864-27.648-71.936-26.88-71.936-26.88l-3.584 4.096c43.52 13.312 63.744 32.512 63.744 32.512-60.811-33.329-132.244-33.335-191.232-7.424-9.472 4.352-15.104 7.424-15.104 7.424s21.248-20.224 67.328-33.536l-2.56-3.072s-35.072-.768-71.936 26.88c0 0-36.864 66.816-36.864 149.248 0 0 21.504 37.12 78.08 38.912 0 0 9.472-11.52 17.152-21.248-32.512-9.728-44.8-30.208-44.8-30.208 3.766 2.636 9.976 6.053 10.496 6.4 43.21 24.198 104.588 32.126 159.744 8.96 8.96-3.328 18.944-8.192 29.44-15.104 0 0-12.8 20.992-46.336 30.464 7.68 9.728 16.896 20.736 16.896 20.736 56.576-1.792 78.336-38.912 78.336-38.912z"></path></svg>
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </div>
+          </div>
+        </header>
+
+        <main>
+          <div
+            class="illumination"
+            :style="{ backgroundColor: `rgba(0, 0, 0, ${0.9 - brightness * 0.1})` }"
+          ></div>
+
+          <section class="widget-side">
+            <ul class="apps" :class="{ 'z-visible': !isMaximizedWindow }">
+              <li
+                v-for="(widget, i) in widgetList"
                 :key="i"
-                class="desktop-card"
-                :class="{ active: desktop === item }"
-                @click="desktop = item"
+                class="box"
+                :class="{ active: isWidgetActived(widget.window.type) }"
+                @click="createAppWindow(widget.window)"
               >
-                {{ item }}
+                <span v-html="widget.iconHtml"></span>
+              </li>
+            </ul>
+          </section>
+
+          <section v-show="desktop === 1" class="widget-center">
+            <div class="col">
+              <div class="row avatar">
+                <img
+                  src="https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg"
+                  alt="Avatar"
+                />
+
+                <p><span>arch</span>@<span>alisson</span></p>
               </div>
 
-              <div
-                class="desktop-add"
-                @click="desktops.length < 9 && desktops.push(desktops.length + 1)"
-              >
-                +
+              <div class="row setting">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+                <span>Settings</span>
               </div>
             </div>
-          </span>
 
-          <div class="date">{{ dateDynamic.time }}</div>
+            <div class="col">
+              <div class="row custom">
+                <!-- TODO: alternar icono de sonido con logica js -->
+                <div class="progress-bar">
+                  <i class="fa fa fa-volume-down"></i>
+                  <div class="bar">
+                    <span :style="{ width: '60%' }"></span>
+                  </div>
+                </div>
 
-          <div class="tool">
-            <i class="fa fa-desktop" aria-hidden="true"></i>
-            <!-- prettier-ignore -->
-            <svg @click="openDircord" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="discord" class="svg-inline--fa fa-discord fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M297.216 243.2c0 15.616-11.52 28.416-26.112 28.416-14.336 0-26.112-12.8-26.112-28.416s11.52-28.416 26.112-28.416c14.592 0 26.112 12.8 26.112 28.416zm-119.552-28.416c-14.592 0-26.112 12.8-26.112 28.416s11.776 28.416 26.112 28.416c14.592 0 26.112-12.8 26.112-28.416.256-15.616-11.52-28.416-26.112-28.416zM448 52.736V512c-64.494-56.994-43.868-38.128-118.784-107.776l13.568 47.36H52.48C23.552 451.584 0 428.032 0 398.848V52.736C0 23.552 23.552 0 52.48 0h343.04C424.448 0 448 23.552 448 52.736zm-72.96 242.688c0-82.432-36.864-149.248-36.864-149.248-36.864-27.648-71.936-26.88-71.936-26.88l-3.584 4.096c43.52 13.312 63.744 32.512 63.744 32.512-60.811-33.329-132.244-33.335-191.232-7.424-9.472 4.352-15.104 7.424-15.104 7.424s21.248-20.224 67.328-33.536l-2.56-3.072s-35.072-.768-71.936 26.88c0 0-36.864 66.816-36.864 149.248 0 0 21.504 37.12 78.08 38.912 0 0 9.472-11.52 17.152-21.248-32.512-9.728-44.8-30.208-44.8-30.208 3.766 2.636 9.976 6.053 10.496 6.4 43.21 24.198 104.588 32.126 159.744 8.96 8.96-3.328 18.944-8.192 29.44-15.104 0 0-12.8 20.992-46.336 30.464 7.68 9.728 16.896 20.736 16.896 20.736 56.576-1.792 78.336-38.912 78.336-38.912z"></path></svg>
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </div>
-        </div>
-      </header>
+                <div class="progress-bar">
+                  <i class="fa fa-sun-o" aria-hidden="true"></i>
+                  <div class="bar">
+                    <span :style="{ width: `${brightness * 11}%` }"></span>
+                    <input
+                      class="liss-input"
+                      type="range"
+                      min="1"
+                      max="9"
+                      v-model="brightness"
+                    />
+                  </div>
+                </div>
 
-      <main>
-        <div
-          class="before"
-          :style="{ backgroundColor: `rgba(0, 0, 0, ${0.9 - brightness * 0.1})` }"
-        ></div>
-
-        <section class="widget-side">
-          <ul class="apps" :class="{ 'z-visible': !isMaximizedWindow }">
-            <li
-              v-for="(widget, i) in widgetList"
-              :key="i"
-              class="box"
-              :class="{ active: isWidgetActived(widget.window.type) }"
-              @click="createAppWindow(widget.window)"
-            >
-              <span v-html="widget.iconHtml"></span>
-            </li>
-          </ul>
-        </section>
-
-        <section v-show="desktop === 1" class="widget-center">
-          <div class="col">
-            <div class="row avatar">
-              <img
-                src="https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg"
-                alt="Avatar"
-              />
-
-              <p><span>arch</span>@<span>alisson</span></p>
-            </div>
-
-            <div class="row setting">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-              <span>Settings</span>
-            </div>
-          </div>
-
-          <div class="col">
-            <div class="row custom">
-              <!-- TODO: alternar icono de sonido con logica js -->
-              <div class="progress-bar">
-                <i class="fa fa fa-volume-down"></i>
-                <div class="bar">
-                  <span :style="{ width: '60%' }"></span>
+                <div class="progress-bar">
+                  <!-- TODO: agregar otro tipo de barra -->
+                  <!-- <i class="fa" aria-hidden="true"></i> -->
+                  <!-- <div class="bar">
+                    <span :style="{ width: '0%' }"></span>
+                  </div> -->
                 </div>
               </div>
 
-              <div class="progress-bar">
-                <i class="fa fa-sun-o" aria-hidden="true"></i>
-                <div class="bar">
-                  <span :style="{ width: `${brightness * 11}%` }"></span>
-                  <input
-                    class="liss-input"
-                    type="range"
-                    min="1"
-                    max="9"
-                    v-model="brightness"
-                  />
+              <div class="row disk-container">
+                <div class="disk">
+                  <span>/</span>
+                  <div class="circle">
+                    <span>6%</span>
+                  </div>
+                  <span>262 GB free</span>
+                </div>
+
+                <div class="disk">
+                  <span>/gdrive</span>
+                  <div class="circle">
+                    <span>6%</span>
+                  </div>
+                  <span>14 GB free</span>
                 </div>
               </div>
+            </div>
 
-              <div class="progress-bar">
-                <!-- TODO: agregar otro tipo de barra -->
-                <!-- <i class="fa" aria-hidden="true"></i> -->
-                <!-- <div class="bar">
-                  <span :style="{ width: '0%' }"></span>
-                </div> -->
+            <div class="col">
+              <div class="row time">
+                <!-- TODO: mejorar posicionamiento de textos -->
+                <p>
+                  <span v-text="dateDynamic.hours"></span
+                  ><span v-text="dateDynamic.minutes"></span>
+                </p>
+              </div>
+              <div class="row calendar">
+                <v-calendar is-expanded weekdays="WWW"></v-calendar>
               </div>
             </div>
+          </section>
 
-            <div class="row disk-container">
-              <div class="disk">
-                <span>/</span>
-                <div class="circle">
-                  <span>6%</span>
-                </div>
-                <span>262 GB free</span>
-              </div>
+          <section v-show="desktop === 1" class="widget-side">
+            <ul class="power">
+              <li class="box">
+                <i class="fa fa-power-off" aria-hidden="true"></i>
+              </li>
 
-              <div class="disk">
-                <span>/gdrive</span>
-                <div class="circle">
-                  <span>6%</span>
-                </div>
-                <span>14 GB free</span>
-              </div>
-            </div>
-          </div>
+              <li class="box">
+                <i class="fa fa-undo" aria-hidden="true"></i>
+              </li>
 
-          <div class="col">
-            <div class="row time">
-              <!-- TODO: mejorar posicionamiento de textos -->
-              <p>
-                <span v-text="dateDynamic.hours"></span
-                ><span v-text="dateDynamic.minutes"></span>
-              </p>
-            </div>
-            <div class="row calendar">
-              <v-calendar is-expanded weekdays="WWW"></v-calendar>
-            </div>
-          </div>
-        </section>
+              <li class="box">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+              </li>
+            </ul>
+          </section>
 
-        <section v-show="desktop === 1" class="widget-side">
-          <ul class="power">
-            <li class="box">
-              <i class="fa fa-power-off" aria-hidden="true"></i>
-            </li>
+          <app-window
+            v-for="(appWindow, i) of appWindowList"
+            :key="i"
+            :data-window="appWindow"
+            @deleted-window="deleteAppWindow($event)"
+            @maximized-window="isMaximizedWindow = !isMaximizedWindow"
+            @distribution-window="updateDistributionWindow($event)"
+            @update-window="updateWindow($event)"
+          />
+        </main>
+      </div>
 
-            <li class="box">
-              <i class="fa fa-undo" aria-hidden="true"></i>
-            </li>
-
-            <li class="box">
-              <i class="fa fa-sign-out" aria-hidden="true"></i>
-            </li>
-          </ul>
-        </section>
-
-        <app-window
-          v-for="(appWindow, i) of appWindowList"
-          :key="i"
-          :data-window="appWindow"
-          @deleted-window="deleteAppWindow($event)"
-          @maximized-window="isMaximizedWindow = !isMaximizedWindow"
-          @distribution-window="updateDistributionWindow($event)"
-          @update-window="updateWindow($event)"
-        />
-      </main>
+      <!-- TODO: despues crear un diseño responsive para mobile -->
+      <div v-else class="mobile" :style="{ display: 'flex' }">
+        <span>For the moment this page is only available for viewing on the desktop</span>
+      </div>
     </div>
 
     <template id="app-window">
@@ -253,9 +260,9 @@
     </template>
 
     <!-- VUE-PRODUCTION -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
     <!-- VUE-DEVELOPMENT -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
 
     <!-- V-CALENDAR -->
     <script src="https://unpkg.com/v-calendar"></script>

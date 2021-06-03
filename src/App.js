@@ -1,5 +1,6 @@
 import draggable from './draggable'
 import widgetList from './data/widgetList.json'
+import dates from './data/dates.json'
 
 Vue.component('AppWindow', {
   template: '#app-window',
@@ -101,29 +102,8 @@ new Vue({
 
   computed: {
     dateDynamic() {
-      const weeks = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-      ]
-      const months = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July',
-        'August',
-        'September',
-        'October',
-        'November',
-        'December'
-      ]
+      const [weeks, months] = dates
+
       const d = this.date
       const hours = d.getHours() < 10 ? '0' + d.getHours() : d.getHours()
       const minutes = d.getMinutes() < 10 ? '0' + d.getMinutes() : d.getMinutes()
@@ -133,6 +113,10 @@ new Vue({
       const time = `${weeks[d.getDay()]} ${months[d.getMonth()]} ${days}, ${hours}:${minutes}`
 
       return { time, hours, minutes }
+    },
+
+    isMobile() {
+      return window.screen.width < 768
     }
   },
 

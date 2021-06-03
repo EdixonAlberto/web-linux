@@ -1,3 +1,21 @@
+.desktop {
+  display: none;
+}
+
+.mobile {
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  span {
+    padding: 0 40px;
+  }
+}
+
 header {
   height: $height-header;
   width: 100%;
@@ -110,7 +128,7 @@ main {
   align-items: center;
   justify-items: center;
 
-  .before {
+  .illumination {
     width: 100%;
     height: calc(100vh - #{$height-header});
     position: absolute;
