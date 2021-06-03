@@ -96,7 +96,8 @@ new Vue({
       brightness: 8,
       isMaximizedWindow: false,
       appWindowList: [],
-      widgetList
+      widgetList,
+      isLock: true
     }
   },
 
@@ -209,6 +210,27 @@ new Vue({
         appWindow => appWindow.type === windowType
       )
       return widgetIndex > -1
+    },
+
+    handlerLock(action) {
+      const removeEvent = () => document.removeEventListener('keypress', null)
+
+      switch (action) {
+        case 'lock':
+          this.desktop = 1
+          this.isLock = true
+
+          document.addEventListener('keypress', () => {
+            this.isLock = false
+            removeEvent()
+          })
+          break
+
+        case 'unlock':
+          this.isLock = false
+          removeEvent()
+          break
+      }
     }
   },
 

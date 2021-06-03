@@ -1,0 +1,52 @@
+@mixin animation($name) {
+  animation-name: $name;
+  animation-duration: 0.8s;
+  animation-delay: unset;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  animation-fill-mode: backwards;
+}
+
+%display-lock {
+  .display-lock {
+    width: 100vw;
+    position: absolute;
+    top: -$height-header;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: $color-nord-white;
+    background-color: rgba($color: #000, $alpha: 0.8);
+    z-index: $z-index-window + 20;
+
+    &.lock {
+      @include animation(animate_deploy_lock);
+      height: calc(100vh + #{$height-header});
+    }
+
+    &.unlock {
+      @include animation(animate_deploy_unlock);
+    }
+  }
+}
+
+@keyframes animate_deploy_lock {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: calc(100vh + #{$height-header});
+  }
+}
+
+@keyframes animate_deploy_unlock {
+  0% {
+    height: calc(100vh + #{$height-header});
+  }
+  100% {
+    height: 0;
+  }
+}

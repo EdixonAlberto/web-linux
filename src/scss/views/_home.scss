@@ -1,3 +1,5 @@
+@import 'display-lock';
+
 .desktop {
   display: none;
 }
@@ -133,4 +135,6 @@ main {
     height: calc(100vh - #{$height-header});
     position: absolute;
   }
+
+  @extend %display-lock;
 }

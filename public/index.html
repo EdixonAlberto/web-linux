@@ -54,6 +54,14 @@
 
         <main>
           <div
+            class="display-lock"
+            :class="[isLock ? 'lock' : 'unlock']"
+            @click="handlerLock('unlock')"
+          >
+            <span>Click or Press a key to unlock</span>
+          </div>
+
+          <div
             class="illumination"
             :style="{ backgroundColor: `rgba(0, 0, 0, ${0.9 - brightness * 0.1})` }"
           ></div>
@@ -165,7 +173,7 @@
                 <i class="fa fa-undo" aria-hidden="true"></i>
               </li>
 
-              <li class="box">
+              <li class="box" @click="handlerLock('lock')">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
               </li>
             </ul>
