@@ -1,8 +1,6 @@
 import draggable from './draggable'
 import widgetList from './data/widgetList.json'
 
-Vue.use(VSwitch)
-
 Vue.component('AppWindow', {
   template: '#app-window',
 
@@ -53,17 +51,19 @@ Vue.component('AppWindow', {
 
       const appWindow = this.$refs.appWindow
 
-      const newAppWindow = {
-        ...this.dataWindow,
-        position: {
-          top: appWindow.style.top,
-          right: appWindow.style.right,
-          bottom: appWindow.style.bottom,
-          left: appWindow.style.left
+      if (appWindow) {
+        const newAppWindow = {
+          ...this.dataWindow,
+          position: {
+            top: appWindow.style.top,
+            right: appWindow.style.right,
+            bottom: appWindow.style.bottom,
+            left: appWindow.style.left
+          }
         }
-      }
 
-      this.$emit('update-window', newAppWindow)
+        this.$emit('update-window', newAppWindow)
+      }
     },
 
     setBrowserUrl(input = '') {

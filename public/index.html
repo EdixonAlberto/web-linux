@@ -207,12 +207,8 @@
           </div>
         </header>
 
-        <div
-          class="body"
-          :class="{ 'header-browser': dataWindow.type === 'browser' }"
-          v-switch="dataWindow.type"
-        >
-          <div id="browser" v-case="'browser'">
+        <div class="body" :class="{ 'header-browser': dataWindow.type === 'browser' }">
+          <div id="browser" v-if="dataWindow.type === 'browser'">
             <div class="search-bar">
               <div class="navegation">
                 <i class="fa fa-arrow-circle-left"></i>
@@ -245,11 +241,11 @@
             <iframe :src="this.browserUrl" frameborder="0"></iframe>
           </div>
 
-          <div id="terminal" v-case="'terminal'">
+          <div id="terminal" v-else-if="dataWindow.type === 'terminal'">
             <textarea autocomplete="off"></textarea>
           </div>
 
-          <div id="web" v-case="'web'">
+          <div id="web" v-else-if="dataWindow.type === 'web'">
             <iframe :src="dataWindow.link" frameborder="0"></iframe>
           </div>
         </div>
@@ -257,14 +253,12 @@
     </template>
 
     <!-- VUE-PRODUCTION -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <!-- VUE-DEVELOPMENT -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
 
     <!-- V-CALENDAR -->
     <script src="https://unpkg.com/v-calendar"></script>
-    <!-- V-SWITCH-CASE -->
-    <script src="https://unpkg.com/v-switch-case@1.0.2/dist/v-switch.min.js"></script>
 
     <!-- MAIN-JS -->
     <script src="static/js/main.js"></script>
