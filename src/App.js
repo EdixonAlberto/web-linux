@@ -97,7 +97,7 @@ new Vue({
       isMaximizedWindow: false,
       appWindowList: [],
       widgetList,
-      isLock: true
+      isLock: null
     }
   },
 
@@ -111,9 +111,11 @@ new Vue({
       const days = d.getDate() < 10 ? '0' + d.getDate() : d.getDate()
 
       // prettier-ignore
-      const time = `${weeks[d.getDay()]} ${months[d.getMonth()]} ${days}, ${hours}:${minutes}`
+      const fullDate = `${weeks[d.getDay()]} ${months[d.getMonth()]} ${days}, ${hours}:${minutes}`
+      // prettier-ignore
+      const fullDateLock = `${weeks[d.getDay()]}, ${months[d.getMonth()]} ${days}, ${d.getFullYear()}`
 
-      return { time, hours, minutes }
+      return { fullDate, fullDateLock, hours, minutes }
     },
 
     isMobile() {

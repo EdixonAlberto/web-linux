@@ -1,6 +1,6 @@
 @mixin animation($name) {
   animation-name: $name;
-  animation-duration: 0.8s;
+  animation-duration: 0.7s;
   animation-delay: unset;
   animation-iteration-count: 1;
   animation-direction: normal;
@@ -8,45 +8,104 @@
   animation-fill-mode: backwards;
 }
 
-%display-lock {
-  .display-lock {
-    width: 100vw;
+.display-lock {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -$height-header;
+  padding-top: $height-header;
+
+  display: grid;
+  grid-template-rows: repeat(auto-fill, calc(100% / 3));
+  grid-template-columns: 100%;
+
+  color: $color-nord-white;
+  text-align: center;
+
+  z-index: $z-index-window + 20;
+  @extend %disable-selection;
+
+  &.lock {
+    @include animation(animate_deploy_lock);
+  }
+
+  &.unlock {
+    @include animation(animate_deploy_unlock);
+    transform: translateY(-100vh);
+  }
+
+  span {
+    &.date {
+      font-size: 10rem;
+      margin: auto;
+      margin-bottom: 0;
+
+      span {
+        &:first-of-type {
+          font-weight: 300;
+        }
+        &:last-of-type {
+          font-weight: 100;
+        }
+      }
+    }
+
+    &.time {
+      font-size: 1.7rem;
+      font-weight: 400;
+    }
+
+    &.text {
+      font-size: 1.8rem;
+      font-weight: 100;
+      margin: auto;
+    }
+  }
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+
     position: absolute;
-    top: -$height-header;
+    top: 0;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-image: url('../images/wallpaper-uwu.png');
+    background-repeat: no-repeat;
+    background-position: 100%;
+    background-size: cover;
 
-    color: $color-nord-white;
-    background-color: rgba($color: #000, $alpha: 0.8);
-    z-index: $z-index-window + 20;
+    filter: blur(1.5px);
+    z-index: -1;
+  }
 
-    &.lock {
-      @include animation(animate_deploy_lock);
-      height: calc(100vh + #{$height-header});
-    }
+  &::after {
+    content: '';
+    width: 100%;
+    height: 100%;
 
-    &.unlock {
-      @include animation(animate_deploy_unlock);
-    }
+    position: absolute;
+    top: 0;
+
+    background-color: rgba($color: #000000, $alpha: 0.2);
+    z-index: -1;
   }
 }
 
 @keyframes animate_deploy_lock {
   0% {
-    height: 0;
+    transform: translateY(-100vh);
   }
   100% {
-    height: calc(100vh + #{$height-header});
+    transform: translateY(0);
   }
 }
 
 @keyframes animate_deploy_unlock {
   0% {
-    height: calc(100vh + #{$height-header});
+    transform: translateY(0);
   }
   100% {
-    height: 0;
+    transform: translateY(-100vh);
   }
 }

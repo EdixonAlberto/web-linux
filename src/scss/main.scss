@@ -12,4 +12,5 @@ body {
 @import 'variables';
 @import 'utils/extends', 'utils/mixins';
 @import 'components/button', 'components/input';
-@import 'views/home', 'views/widget-center', 'views/widget-side', 'views/window';
+@import 'views/home', 'views/widget-center', 'views/widget-side', 'views/window',
+  'views/display-lock';
