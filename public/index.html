@@ -68,7 +68,7 @@
             </div>
           </header>
 
-          <main>
+          <main :class="{ 'virtual-desktop': desktop !== 1 }">
             <div
               class="illumination"
               :style="{ backgroundColor: `rgba(0, 0, 0, ${0.9 - brightness * 0.1})` }"
@@ -88,7 +88,7 @@
               </ul>
             </section>
 
-            <section v-show="desktop === 1" class="widget-center">
+            <section v-if="desktop === 1" class="widget-center">
               <div class="col">
                 <div class="row avatar">
                   <img
@@ -169,6 +169,10 @@
                   <v-calendar is-expanded weekdays="WWW"></v-calendar>
                 </div>
               </div>
+            </section>
+
+            <section v-else class="desktop">
+              <app-folder />
             </section>
 
             <section v-show="desktop === 1" class="widget-side">
@@ -276,10 +280,18 @@
       </div>
     </template>
 
+    <template id="app-folder">
+      <div class="folder-container" ref="appFolder">
+        <div>
+          <i class="fa fa-folder"></i>
+        </div>
+      </div>
+    </template>
+
     <!-- VUE-PRODUCTION -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <!-- VUE-DEVELOPMENT -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
 
     <!-- V-CALENDAR -->
     <script src="https://unpkg.com/v-calendar"></script>

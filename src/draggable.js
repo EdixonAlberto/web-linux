@@ -1,44 +1,56 @@
-export default function draggable(appWindow) {
-  const appHeader = appWindow.children[0]
+export default function draggable(
+  el,
+  elSelectable,
+  elNoSelectable,
+  offsetPosition = { left: 0, top: 0 }
+) {
+  const elDowm = elSelectable ? elSelectable : el
 
-  // Se desactiva el soporte de arrastre nativo del navegador,
-  // y de esta manera no entre en conflicto con el manipulado.
-  appWindow.ondragstart = () => false
+  /*
+    Se desactiva el soporte de arrastre nativo del navegador
+    para que no entre en conflicto con el arrastre personalizado.
+  */
+  el.ondragstart = () => false
 
-  // Se manipula el evento de arrastre al seleccionar el header de la ventana
-  appHeader.onmousedown = event => {
-    const buttons = appHeader.children[2]
-    const heightHeader = 30
-    const shiftX = event.clientX - appWindow.getBoundingClientRect().left
-    const shiftY = event.clientY - appWindow.getBoundingClientRect().top
+  // Se manipula el evento de arrastre al hacer click en el elemento seleccionable
+  elDowm.onmousedown = event => {
+    const isMouseOnHeader = elNoSelectable
+      ? event.layerX > elDowm.clientWidth - elNoSelectable.clientWidth
+      : null
+    const shiftX = event.clientX - el.getBoundingClientRect().left
+    const shiftY = event.clientY - el.getBoundingClientRect().top
     const main = document.querySelector('main')
-    const isMouseOnHeader = event.layerX > appHeader.clientWidth - buttons.clientWidth
 
-    // Se descarta la zona de los botones en el header
+    // Se descarta la zona no seleccionable
     if (isMouseOnHeader) return true
 
-    // Mover nuestra ventana posicionada absolutamente bajo el puntero
+    // Mover elemento posicionado absolutamente bajo el puntero
     const onMouseMove = event => {
       /*
         Se verifica el estado actual del boton cuando
-        el mouse sale del contenedor
-        y regresa sobre la ventana
+        el mouse sale del contenedor y regresa sobre la ventana
       */
       if (event.buttons) {
-        appWindow.style.transition = 'none'
+        el.style.transition = 'none'
 
-        // Centrar la ventana en las coordenadas (pageX, pageY)
+        // Centrar el elemento en las coordenadas (pageX, pageY)
         const pageX = event.pageX
         const pageY = event.pageY
-        const windowWidth = pageX - shiftX + appWindow.clientWidth
-        const windowHeight = pageY - shiftY + appWindow.clientHeight - heightHeader
+        const elWidth = pageX - shiftX + el.clientWidth
+        const elHeight = pageY - shiftY + el.clientHeight - offsetPosition.top
 
-        if (pageX - shiftX > 0 && windowWidth < main.clientWidth) {
-          appWindow.style.left = pageX - shiftX + 'px'
+        const positionAbsolute = {
+          left: pageX - shiftX - offsetPosition.left,
+          top: pageY - shiftY - offsetPosition.top
         }
 
-        if (pageY > heightHeader + shiftY && windowHeight < main.clientHeight) {
-          appWindow.style.top = pageY - shiftY + 'px'
+        if (positionAbsolute.left > 0 && elWidth < main.clientWidth) {
+          el.style.left = positionAbsolute.left + 'px'
+        }
+
+        if (positionAbsolute.top > 0 && elHeight < main.clientHeight) {
+          el.style.top =
+            positionAbsolute.top + (elSelectable ? elSelectable.clientHeight : 0) + 'px'
         }
 
         return false
@@ -50,13 +62,13 @@ export default function draggable(appWindow) {
 
     const destroyOnMouseMove = () => {
       document.removeEventListener('mousemove', onMouseMove)
-      appWindow.onmouseup = null
+      el.onmouseup = null
     }
 
-    // Mover la ventana con mousemove
+    // Mover el elemento con mousemove
     document.addEventListener('mousemove', onMouseMove)
 
-    // Al soltar la ventana quitar cualquier manejador de eventos innecesario
-    appWindow.onmouseup = () => destroyOnMouseMove
+    // Al soltar el elemento se remueve el manejador de eventos
+    el.onmouseup = () => destroyOnMouseMove
   }
 }

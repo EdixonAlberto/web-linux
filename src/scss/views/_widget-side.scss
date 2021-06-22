@@ -6,6 +6,7 @@ section.widget-side {
   display: flex;
   align-items: center;
   justify-content: center;
+  // TODO: determinar si esto lleva position relative
 
   li.box {
     cursor: pointer;

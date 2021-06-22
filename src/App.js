@@ -80,7 +80,33 @@ Vue.component('AppWindow', {
   },
 
   mounted() {
-    draggable(this.$refs.appWindow)
+    const { appWindow } = this.$refs
+    const appHeader = appWindow.children[0]
+    const buttons = appHeader.children[2]
+    const header = document.querySelector('header')
+
+    const offsetPosition = {
+      left: 0,
+      top: header.clientHeight
+    }
+
+    draggable(appWindow, appHeader, buttons, offsetPosition)
+  }
+})
+
+Vue.component('AppFolder', {
+  template: '#app-folder',
+
+  mounted() {
+    const header = document.querySelector('header')
+    const widgetSide = document.querySelector('section.widget-side')
+
+    const offsetPosition = {
+      left: widgetSide.clientWidth,
+      top: header.clientHeight
+    }
+
+    draggable(this.$refs.appFolder, null, null, offsetPosition)
   }
 })
 
