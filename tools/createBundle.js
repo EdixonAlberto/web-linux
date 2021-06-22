@@ -6,13 +6,13 @@ const babelify = require('babelify')
 const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'))
 
 const MESSAGE = `/*!
- *   ${pkg.name} v${pkg.version}
- *   ${pkg.description}
- *   Copyright (c) 2020 ${pkg.author.name}
+ * ${pkg.name} v${pkg.version}
+ * ${pkg.description}
+ * Copyright (c) 2020 ${pkg.author.name}
+ * ${pkg.author.url}
  */`
 
 const PATH_BASE = resolve('public', 'static', 'js')
-
 const NODE_ENV = process.env.NODE_ENV
 
 const browserifyObject = browserify(resolve('src', 'App.js'), {
@@ -37,7 +37,7 @@ browserifyObject.transform(
 browserifyObject.bundle((err, buffer) => {
   if (err) console.error('ERROR-BUNDLE ->', err.message)
   else {
-    const code = `${MESSAGE}\n${buffer}`
+    const code = NODE_ENV !== 'production' ? buffer : `${MESSAGE}\n${buffer}`
 
     fs.mkdir(
       PATH_BASE,

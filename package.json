@@ -25,7 +25,7 @@
     "bundle": "node tools/createBundle.js",
     "build": "npm run bundle && npm run sass-build",
     "js-watch": "nodemon -e js,json -w src --exec \"npm run bundle\"",
-    "start": "concurrently \"npm run sass-watch\" \"npm run js-watch\" \"npm run serve\""
+    "dev": "concurrently \"npm run sass-watch\" \"npm run js-watch\" \"npm run serve\""
   },
   "repository": {
     "type": "git",
