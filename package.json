@@ -34,12 +34,11 @@
   "bugs": {
     "url": "https://github.com/EdixonAlberto/web-liss/issues"
   },
-  "homepage": "https://github.com/EdixonAlberto/web-liss#readme",
+  "homepage": "http://skyliss.netlify.app",
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",
-    "@babel/preset-react": "^7.13.13",
     "babelify": "^10.0.0",
     "browserify": "^17.0.0",
     "concurrently": "^6.1.0",

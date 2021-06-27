@@ -2,6 +2,7 @@ import draggable from './draggable'
 import widgetList from './data/widgetList.json'
 import dates from './data/dates.json'
 import accessList from './data/accessList.json'
+import Cache from './Cache'
 
 Vue.component('AppWindow', {
   template: '#app-window',
@@ -139,17 +140,16 @@ new Vue({
 
   data() {
     return {
-      // TODO: guardar config en localstore
       date: new Date(),
       desktops: [1],
       currentDesktop: 0,
       brightness: '6',
+      isLock: null,
       isMaximizedWindow: false,
       appWindowList: [],
       appAccessList: accessList,
       accessEvent: '',
-      widgetList,
-      isLock: null
+      widgetList
     }
   },
 
@@ -285,10 +285,40 @@ new Vue({
           removeEvent()
           break
       }
+    },
+
+    loadCache() {
+      const data = Cache.getData()
+
+      if (data) {
+        const { desktops, currentDesktop, brightness, isLock } = data
+
+        this.desktops = desktops
+        this.currentDesktop = currentDesktop
+        this.brightness = brightness
+        this.isLock = isLock
+      }
+    }
+  },
+
+  watch: {
+    // TODO: mejorar la forma en la que se actualiza la cache
+    desktops(val) {
+      Cache.setData({ desktops: val })
+    },
+    currentDesktop(val) {
+      Cache.setData({ currentDesktop: val })
+    },
+    brightness(val) {
+      Cache.setData({ brightness: val })
+    },
+    isLock(val) {
+      Cache.setData({ isLock: val })
     }
   },
 
   created() {
+    this.loadCache()
     this.initDateDynamic()
   }
 })

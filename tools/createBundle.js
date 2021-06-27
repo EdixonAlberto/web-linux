@@ -21,7 +21,7 @@ const browserifyObject = browserify(resolve('src', 'App.js'), {
 
 browserifyObject.transform(
   babelify.configure({
-    presets: ['@babel/preset-env', '@babel/preset-react'],
+    presets: ['@babel/preset-env'],
     sourceMaps: false,
     comments: true,
     minified: false,
