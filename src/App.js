@@ -180,9 +180,18 @@ new Vue({
       setInterval(() => (this.date = new Date()), 1000 * 60)
     },
 
-    openDircord() {
-      open('https://discord.com/app', 'newwindow', 'width=700,height=600')
-    },
+    // TODO: investigar como abrir discord web fron un appWindow
+    // openDiscord() {
+    //// opcion 1
+    //   open('https://discord.com/app', 'newwindow', 'width=700,height=600')
+
+    //// opcion 2
+    //   this.createAppWindow({
+    //     title: 'Discord',
+    //     type: 'web',
+    //     link: 'https://www.discord.com/app&output=embed'
+    //   })
+    // },
 
     getId() {
       return new Date().getTime().toString().substr(-3)
@@ -211,7 +220,7 @@ new Vue({
     createAppWindow(newAppWindow) {
       const windowNotRepeted = !this.appWindowList.length
         ? true
-        : !this.appWindowList.some(appWindow => appWindow.type === newAppWindow.type)
+        : !this.appWindowList.some(appWindow => appWindow.title === newAppWindow.title)
 
       if (windowNotRepeted) {
         const appWindowList = this.appWindowList.map(appWindow => ({
@@ -230,7 +239,7 @@ new Vue({
         this.appWindowList = appWindowList
       } else {
         this.appWindowList = this.appWindowList.map(appWindow => {
-          return appWindow.type === newAppWindow.type
+          return appWindow.title === newAppWindow.title
             ? {
                 ...appWindow,
                 focus: !appWindow.focus
@@ -259,9 +268,9 @@ new Vue({
       })
     },
 
-    isWidgetActived(windowType) {
+    isWidgetActived(windowTitle) {
       const widgetIndex = this.appWindowList.findIndex(
-        appWindow => appWindow.type === windowType
+        appWindow => appWindow.title === windowTitle
       )
       return widgetIndex > -1
     },
