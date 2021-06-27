@@ -1,6 +1,7 @@
 import draggable from './draggable'
 import widgetList from './data/widgetList.json'
 import dates from './data/dates.json'
+import accessList from './data/accessList.json'
 
 Vue.component('AppWindow', {
   template: '#app-window',
@@ -94,8 +95,31 @@ Vue.component('AppWindow', {
   }
 })
 
-Vue.component('AppFolder', {
-  template: '#app-folder',
+Vue.component('AppAccess', {
+  template: '#app-access',
+
+  props: {
+    dataAccess: {
+      type: Object,
+      required: true
+    },
+    event: {
+      type: String,
+      required: true
+    }
+  },
+
+  data() {
+    return {
+      active: false
+    }
+  },
+
+  watch: {
+    event(val) {
+      console.log(val)
+    }
+  },
 
   mounted() {
     const header = document.querySelector('header')
@@ -106,7 +130,7 @@ Vue.component('AppFolder', {
       top: header.clientHeight
     }
 
-    draggable(this.$refs.appFolder, null, null, offsetPosition)
+    draggable(this.$refs.appAccess, null, null, offsetPosition)
   }
 })
 
@@ -117,11 +141,13 @@ new Vue({
     return {
       // TODO: guardar config en localstore
       date: new Date(),
-      desktops: [1, 2, 3],
-      desktop: 1,
-      brightness: 8,
+      desktops: [1],
+      currentDesktop: 0,
+      brightness: '6',
       isMaximizedWindow: false,
       appWindowList: [],
+      appAccessList: accessList,
+      accessEvent: '',
       widgetList,
       isLock: null
     }

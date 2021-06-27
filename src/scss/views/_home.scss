@@ -32,43 +32,26 @@ header {
     color: white;
     font-size: 0.9rem;
 
-    .desktop {
+    .desktop-list {
       display: flex;
+      flex-direction: row;
+      column-gap: 10px;
       align-items: center;
+      margin-left: 10px;
       z-index: 1;
 
-      .home {
-        i {
-          width: $width-icon-bar;
-          text-align: center;
-          font-size: $size-icon-bar;
-          line-height: $height-header;
-        }
-      }
+      .desktop-card {
+        cursor: pointer;
+        width: $width-icon-bar;
+        text-align: center;
+        line-height: $height-header;
 
-      .desktop-list {
-        display: flex;
-        flex-direction: row;
-        column-gap: 10px;
-        align-items: center;
-        margin-left: 10px;
-
-        .desktop-card,
-        .desktop-add {
-          cursor: pointer;
-          width: $width-icon-bar;
-          text-align: center;
-          line-height: $height-header;
-        }
-
-        .desktop-card {
-          &.active {
-            border-bottom: 2px solid $color-nord-blue;
-          }
-        }
-
-        .desktop-add {
+        &.add {
           font-size: 22px;
+        }
+
+        &.active {
+          border-bottom: 2px solid $color-nord-blue;
         }
       }
     }

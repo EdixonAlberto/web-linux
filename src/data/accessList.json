@@ -1,0 +1,31 @@
+[
+  [
+    {
+      "name": "Firefox",
+      "type": "web",
+      "iconHtml": "<i class='fa fa-firefox' aria-hidden='true'></i>",
+      "position": {
+        "top": "0",
+        "right": "0"
+      }
+    },
+    {
+      "name": "About",
+      "type": "folder",
+      "iconHtml": "<i class='fa fa-folder' aria-hidden='true'></i>",
+      "position": {
+        "top": "85px",
+        "right": "0"
+      }
+    },
+    {
+      "name": "Trash",
+      "type": "folder",
+      "iconHtml": "<i class='fa fa-trash' aria-hidden='true'></i>",
+      "position": {
+        "top": "170px",
+        "right": "0"
+      }
+    }
+  ]
+]

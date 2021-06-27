@@ -32,30 +32,32 @@
         <div :style="{ display: isLock === null ? 'none' : 'block' }">
           <header>
             <div class="taskbar">
-              <span class="desktop">
-                <div class="home">
-                  <i class="fa fa-home"></i>
+              <div class="desktop-list">
+                <div
+                  class="desktop-card"
+                  :class="{ active: currentDesktop === 0 }"
+                  @click="currentDesktop = 0"
+                >
+                  <i class="fa fa-home" aria-hidden="true"></i>
                 </div>
 
-                <div class="desktop-list">
-                  <div
-                    v-for="(item, i) of desktops"
-                    :key="i"
-                    class="desktop-card"
-                    :class="{ active: desktop === item }"
-                    @click="desktop = item"
-                  >
-                    {{ item }}
-                  </div>
-
-                  <div
-                    class="desktop-add"
-                    @click="desktops.length < 9 && desktops.push(desktops.length + 1)"
-                  >
-                    +
-                  </div>
+                <div
+                  v-for="(desktop, i) of desktops"
+                  :key="i"
+                  class="desktop-card"
+                  :class="{ active: currentDesktop === desktop }"
+                  @click="currentDesktop = desktop"
+                >
+                  {{ desktop }}
                 </div>
-              </span>
+
+                <div
+                  class="desktop-card add"
+                  @click="desktops.length < 3 && desktops.push(desktops.length + 1)"
+                >
+                  +
+                </div>
+              </div>
 
               <div class="date">{{ dateDynamic.fullDate }}</div>
 
@@ -68,10 +70,10 @@
             </div>
           </header>
 
-          <main :class="{ 'virtual-desktop': desktop !== 1 }">
+          <main :class="{ 'virtual-desktop': currentDesktop !== 0 }">
             <div
               class="illumination"
-              :style="{ backgroundColor: `rgba(0, 0, 0, ${0.9 - brightness * 0.1})` }"
+              :style="{ backgroundColor: `rgba(0, 0, 0, ${0.9 - Number(brightness) * 0.1})` }"
             ></div>
 
             <section class="widget-side">
@@ -88,7 +90,7 @@
               </ul>
             </section>
 
-            <section v-if="desktop === 1" class="widget-center">
+            <section v-if="currentDesktop === 0" class="widget-center">
               <div class="col">
                 <div class="row avatar">
                   <img
@@ -109,7 +111,7 @@
                 <div class="row custom">
                   <!-- TODO: alternar icono de sonido con logica js -->
                   <div class="progress-bar">
-                    <i class="fa fa fa-volume-down"></i>
+                    <i class="fa fa fa-volume-down" aria-hidden="true"></i>
                     <div class="bar">
                       <span :style="{ width: '60%' }"></span>
                     </div>
@@ -118,7 +120,7 @@
                   <div class="progress-bar">
                     <i class="fa fa-sun-o" aria-hidden="true"></i>
                     <div class="bar">
-                      <span :style="{ width: `${brightness * 11}%` }"></span>
+                      <span :style="{ width: `${Number(brightness) * 11}%` }"></span>
                       <input
                         class="liss-input"
                         type="range"
@@ -172,10 +174,15 @@
             </section>
 
             <section v-else class="desktop">
-              <app-folder />
+              <app-access
+                v-for="(appAccess, i) of appAccessList[currentDesktop - 1]"
+                :key="i"
+                :data-access="appAccess"
+                :event="accessEvent"
+              />
             </section>
 
-            <section v-show="desktop === 1" class="widget-side">
+            <section v-show="currentDesktop === 0" class="widget-side">
               <ul class="power">
                 <li class="box">
                   <i class="fa fa-power-off" aria-hidden="true"></i>
@@ -239,17 +246,21 @@
           <div id="browser" v-if="dataWindow.type === 'browser'">
             <div class="search-bar">
               <div class="navegation">
-                <i class="fa fa-arrow-circle-left"></i>
-                <i class="fa fa-arrow-circle-right"></i>
-                <i class="fa fa-repeat" @click="setBrowserUrl()"></i>
-                <i class="fa fa-home" @click="setBrowserUrl('google.com')"></i>
+                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
+                <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                <i class="fa fa-repeat" aria-hidden="true" @click="setBrowserUrl()"></i>
+                <i
+                  class="fa fa-home"
+                  aria-hidden="true"
+                  @click="setBrowserUrl('google.com')"
+                ></i>
               </div>
 
               <div class="input">
                 <div class="icons">
-                  <i class="fa fa-shield"></i>
+                  <i class="fa fa-shield" aria-hidden="true"></i>
                   <span></span>
-                  <i class="fa fa-lock"></i>
+                  <i class="fa fa-lock" aria-hidden="true"></i>
                 </div>
 
                 <input
@@ -280,18 +291,22 @@
       </div>
     </template>
 
-    <template id="app-folder">
-      <div class="folder-container" ref="appFolder">
-        <div>
-          <i class="fa fa-folder"></i>
-        </div>
+    <template id="app-access">
+      <div
+        ref="appAccess"
+        class="access-container"
+        :class="{ active }"
+        :style="dataAccess.position"
+      >
+        <span v-html="dataAccess.iconHtml"></span>
+        <span class="name" v-text="dataAccess.name"></span>
       </div>
     </template>
 
     <!-- VUE-PRODUCTION -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
     <!-- VUE-DEVELOPMENT -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
     <!-- V-CALENDAR -->
     <script src="https://unpkg.com/v-calendar"></script>

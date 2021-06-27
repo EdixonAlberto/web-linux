@@ -1,4 +1,6 @@
-$size: 80px;
+$size-grid: 80px;
+$size-icon: 35px;
+$size-name: 20px;
 
 section.desktop {
   width: 100%;
@@ -6,8 +8,9 @@ section.desktop {
   position: relative;
 
   display: grid;
-  grid-template-columns: repeat(auto-fill, $size);
-  grid-template-rows: repeat(auto-fill, $size);
+  // TODO: posicionar los iconos en el escritorio por medio de la grilla
+  // grid-template-columns: repeat(auto-fill, $size-grid);
+  // grid-template-rows: repeat(auto-fill, $size-grid);
   align-content: center;
   justify-content: center;
 
@@ -16,22 +19,41 @@ section.desktop {
   font-size: 2rem;
   font-weight: 600;
 
-  .folder-container {
-    width: 80px;
-    height: 80px;
+  .access-container {
+    width: $size-icon;
+    height: $size-icon + $size-name;
     position: absolute;
-    z-index: $z-index-window + 10;
+    display: flex;
+    flex-direction: column;
+    row-gap: 1px;
 
-    div {
+    border: none;
+    border-radius: 5px;
+    padding: 10px 25px;
+    z-index: $z-index-window + 10;
+    user-select: none;
+
+    &.active {
+      border: 1px solid $color-nord-white;
+      background-color: rgba($color: $color-nord-grey, $alpha: 0.4);
+    }
+
+    &:not(.active):hover {
+      background-color: rgba($color: $color-nord-white, $alpha: 0.2);
+    }
+
+    i {
       width: 100%;
       height: 100%;
-      text-align: center;
+      color: white;
+      font-size: $size-icon;
+      line-height: $size-icon;
+    }
 
-      i {
-        color: white;
-        font-size: 40px;
-        line-height: 80px;
-      }
+    span {
+      font-size: 0.8rem;
+      font-weight: 400;
+      line-height: $size-name;
     }
   }
 }
