@@ -141,11 +141,12 @@ new Vue({
   data() {
     return {
       date: new Date(),
+      calendarDate: new Date(),
       desktops: [1],
       currentDesktop: 0,
       progressBar: {
-        brightness: '6',
-        volume: '6'
+        brightness: '7',
+        volume: '4'
       },
       isLock: null,
       isMaximizedWindow: false,

@@ -153,14 +153,13 @@
 
               <div class="col">
                 <div class="row time">
-                  <!-- TODO: mejorar posicionamiento de textos -->
                   <p>
                     <span v-text="dateDynamic.hours"></span
                     ><span v-text="dateDynamic.minutes"></span>
                   </p>
                 </div>
                 <div class="row calendar">
-                  <v-calendar is-expanded weekdays="WWW"></v-calendar>
+                  <v-date-picker v-model="calendarDate" is-expanded weekdays="WWW" />
                 </div>
               </div>
             </section>

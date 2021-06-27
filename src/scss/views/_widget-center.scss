@@ -46,8 +46,8 @@ section.widget-center {
           position: relative;
 
           img {
-            height: calc(80% - 20px);
-            width: 80%;
+            height: calc(70% - 20px);
+            width: 65%;
             display: block;
             margin: auto;
             text-align: center;
@@ -189,6 +189,7 @@ section.widget-center {
           text-align: center;
 
           p {
+            // TODO: mejorar el centrado de este texto en el row
             line-height: 2.5rem;
             font-size: 3rem;
             margin: 0;
@@ -229,6 +230,10 @@ section.widget-center {
               .vc-weekday {
                 color: $color-nord-white;
                 font-weight: 700;
+              }
+
+              .vc-day .vc-day-layer .vc-highlight {
+                background-color: $color-nord-blue !important;
               }
             }
 
