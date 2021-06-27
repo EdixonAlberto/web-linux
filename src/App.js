@@ -143,7 +143,10 @@ new Vue({
       date: new Date(),
       desktops: [1],
       currentDesktop: 0,
-      brightness: '6',
+      progressBar: {
+        brightness: '6',
+        volume: '6'
+      },
       isLock: null,
       isMaximizedWindow: false,
       appWindowList: [],
@@ -300,11 +303,11 @@ new Vue({
       const data = Cache.getData()
 
       if (data) {
-        const { desktops, currentDesktop, brightness, isLock } = data
+        const { desktops, currentDesktop, brightness, volume, isLock } = data
 
         this.desktops = desktops
         this.currentDesktop = currentDesktop
-        this.brightness = brightness
+        this.progressBar = { brightness, volume }
         this.isLock = isLock
       }
     }
@@ -318,8 +321,11 @@ new Vue({
     currentDesktop(val) {
       Cache.setData({ currentDesktop: val })
     },
-    brightness(val) {
+    'progressBar.brightness'(val) {
       Cache.setData({ brightness: val })
+    },
+    'progressBar.volume'(val) {
+      Cache.setData({ volume: val })
     },
     isLock(val) {
       Cache.setData({ isLock: val })

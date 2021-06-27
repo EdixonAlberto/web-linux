@@ -71,7 +71,11 @@
           <main :class="{ 'virtual-desktop': currentDesktop !== 0 }">
             <div
               class="illumination"
-              :style="{ backgroundColor: `rgba(0, 0, 0, ${0.9 - Number(brightness) * 0.1})` }"
+              :style="{
+                backgroundColor: `
+                  rgba(0, 0, 0, ${0.9 - Number(progressBar.brightness) * 0.1})
+                `
+              }"
             ></div>
 
             <section class="widget-side">
@@ -107,34 +111,24 @@
 
               <div class="col">
                 <div class="row custom">
-                  <!-- TODO: alternar icono de sonido con logica js -->
-                  <div class="progress-bar">
-                    <i class="fa fa fa-volume-down" aria-hidden="true"></i>
-                    <div class="bar">
-                      <span :style="{ width: '60%' }"></span>
-                    </div>
-                  </div>
+                  <div class="progress-bar" v-for="(bar, key, i) in progressBar" :key="i">
+                    <i
+                      v-if="key === 'brightness'"
+                      class="fa fa-sun-o"
+                      aria-hidden="true"
+                    ></i>
+                    <i v-else class="fa fa fa-volume-down" aria-hidden="true"></i>
 
-                  <div class="progress-bar">
-                    <i class="fa fa-sun-o" aria-hidden="true"></i>
                     <div class="bar">
-                      <span :style="{ width: `${Number(brightness) * 11}%` }"></span>
+                      <span :style="{ width: `${Number(bar) * 11}%` }"></span>
                       <input
                         class="liss-input"
                         type="range"
                         min="1"
                         max="9"
-                        v-model="brightness"
+                        v-model="progressBar[key]"
                       />
                     </div>
-                  </div>
-
-                  <div class="progress-bar">
-                    <!-- TODO: agregar otro tipo de barra -->
-                    <!-- <i class="fa" aria-hidden="true"></i> -->
-                    <!-- <div class="bar">
-                    <span :style="{ width: '0%' }"></span>
-                  </div> -->
                   </div>
                 </div>
 
