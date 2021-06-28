@@ -114,10 +114,4 @@ main {
   &.virtual-desktop {
     grid-template-columns: 5% 95%;
   }
-
-  .illumination {
-    width: 100%;
-    height: calc(100vh - #{$height-header});
-    position: absolute;
-  }
 }

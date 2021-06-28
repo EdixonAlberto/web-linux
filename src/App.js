@@ -135,20 +135,21 @@ Vue.component('AppAccess', {
   }
 })
 
+const cache = new Cache({
+  desktops: [1],
+  currentDesktop: 0,
+  progressBar: { brightness: '10', volume: '3' },
+  isLock: null
+})
+
 new Vue({
   el: '#app',
 
   data() {
     return {
+      ...cache.data,
       date: new Date(),
       calendarDate: new Date(),
-      desktops: [1],
-      currentDesktop: 0,
-      progressBar: {
-        brightness: '7',
-        volume: '4'
-      },
-      isLock: null,
       isMaximizedWindow: false,
       appWindowList: [],
       appAccessList: accessList,
@@ -298,43 +299,29 @@ new Vue({
           removeEvent()
           break
       }
-    },
-
-    loadCache() {
-      const data = Cache.getData()
-
-      if (data) {
-        const { desktops, currentDesktop, brightness, volume, isLock } = data
-
-        this.desktops = desktops
-        this.currentDesktop = currentDesktop
-        this.progressBar = { brightness, volume }
-        this.isLock = isLock
-      }
     }
   },
 
   watch: {
     // TODO: mejorar la forma en la que se actualiza la cache
     desktops(val) {
-      Cache.setData({ desktops: val })
+      cache.setData({ desktops: val })
     },
     currentDesktop(val) {
-      Cache.setData({ currentDesktop: val })
+      cache.setData({ currentDesktop: val })
     },
     'progressBar.brightness'(val) {
-      Cache.setData({ brightness: val })
+      cache.setData({ brightness: val })
     },
     'progressBar.volume'(val) {
-      Cache.setData({ volume: val })
+      cache.setData({ volume: val })
     },
     isLock(val) {
-      Cache.setData({ isLock: val })
+      cache.setData({ isLock: val })
     }
   },
 
   created() {
-    this.loadCache()
     this.initDateDynamic()
   }
 })

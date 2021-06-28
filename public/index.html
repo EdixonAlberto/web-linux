@@ -17,11 +17,12 @@
         <div
           class="display-lock"
           :class="[isLock !== null && (isLock ? 'lock' : 'unlock')]"
+          :style="{ filter: `brightness(${Number(progressBar.brightness) * 0.1})` }"
           @click="handlerLock('unlock')"
         >
           <span class="date">
             <span v-text="dateDynamic.hours"></span
-            ><span v-text="':' + dateDynamic.minutes"> </span>
+            ><span v-text="':' + dateDynamic.minutes"></span>
           </span>
 
           <span class="time">{{ dateDynamic.fullDateLock }}</span>
@@ -29,7 +30,13 @@
           <span class="text">Click or Press a Key to Unlock</span>
         </div>
 
-        <div :style="{ display: isLock === null ? 'none' : 'block' }">
+        <div
+          class="display"
+          :style="{
+            display: isLock === null ? 'none' : 'block',
+            filter: `brightness(${Number(progressBar.brightness) * 0.1})`
+          }"
+        >
           <header>
             <div class="taskbar">
               <div class="desktop-list">
@@ -69,15 +76,6 @@
           </header>
 
           <main :class="{ 'virtual-desktop': currentDesktop !== 0 }">
-            <div
-              class="illumination"
-              :style="{
-                backgroundColor: `
-                  rgba(0, 0, 0, ${0.9 - Number(progressBar.brightness) * 0.1})
-                `
-              }"
-            ></div>
-
             <section class="widget-side">
               <ul class="apps" :class="{ 'z-visible': !isMaximizedWindow }">
                 <li
@@ -120,12 +118,12 @@
                     <i v-else class="fa fa fa-volume-down" aria-hidden="true"></i>
 
                     <div class="bar">
-                      <span :style="{ width: `${Number(bar) * 11}%` }"></span>
+                      <span :style="{ width: `${Number(bar) * 10}%` }"></span>
                       <input
                         class="liss-input"
                         type="range"
-                        min="1"
-                        max="9"
+                        min="2"
+                        max="10"
                         v-model="progressBar[key]"
                       />
                     </div>

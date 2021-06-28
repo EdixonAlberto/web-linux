@@ -1,20 +1,33 @@
 class Cache {
-  constructor() {}
+  data = null
 
-  static getData() {
+  constructor(initialData) {
+    const data = this.getData()
+
+    if (data) this.data = data
+    else {
+      this.setData(initialData)
+      this.data = initialData
+    }
+  }
+
+  getData() {
     return JSON.parse(localStorage.getItem('data'))
   }
 
-  static setData(newData) {
+  setData(newData) {
     const localData = {
-      ...this.getData(),
+      ...this.data,
       ...newData
     }
+
     localStorage.setItem('data', JSON.stringify(localData))
+    this.data = localData
   }
 
-  static cleanData() {
+  cleanData() {
     localStorage.clear()
+    this.data = null
   }
 }
 
