@@ -206,96 +206,10 @@
       </div>
     </div>
 
-    <template id="app-window">
-      <div
-        v-show="dataWindow.focus"
-        ref="appWindow"
-        class="app-window"
-        :class="{
-          show: showWindow,
-          maximize: maximizeWindow,
-          focus: dataWindow.z === 4
-        }"
-        :style="styleCustom"
-        @mousedown="$emit('distribution-window', dataWindow)"
-      >
-        <header @click="updatePosition">
-          <div class="separator"></div>
-
-          <span v-text="dataWindow.title"></span>
-
-          <div class="buttons">
-            <span @click="updateFocus"></span>
-            <span @click="maximize"></span>
-            <span @click="$emit('deleted-window', dataWindow.id)"></span>
-          </div>
-        </header>
-
-        <div class="body" :class="{ 'header-browser': dataWindow.type === 'browser' }">
-          <div id="browser" v-if="dataWindow.type === 'browser'">
-            <div class="search-bar">
-              <div class="navegation">
-                <i class="fa fa-arrow-circle-left" aria-hidden="true"></i>
-                <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                <i class="fa fa-repeat" aria-hidden="true" @click="setBrowserUrl()"></i>
-                <i
-                  class="fa fa-home"
-                  aria-hidden="true"
-                  @click="setBrowserUrl('google.com')"
-                ></i>
-              </div>
-
-              <div class="input">
-                <div class="icons">
-                  <i class="fa fa-shield" aria-hidden="true"></i>
-                  <span></span>
-                  <i class="fa fa-lock" aria-hidden="true"></i>
-                </div>
-
-                <input
-                  type="text"
-                  v-model="browserInput"
-                  @keyup.enter="setBrowserUrl()"
-                />
-              </div>
-
-              <div class="menu">
-                <i class="fa fa-user-circle-o" aria-hidden="true"></i>
-                <span></span>
-                <i class="fa fa-bars" aria-hidden="true"></i>
-              </div>
-            </div>
-
-            <iframe :src="this.browserUrl" frameborder="0"></iframe>
-          </div>
-
-          <div id="terminal" v-else-if="dataWindow.type === 'terminal'">
-            <textarea autocomplete="off"></textarea>
-          </div>
-
-          <div id="web" v-else-if="dataWindow.type === 'web'">
-            <iframe :src="dataWindow.link" frameborder="0"></iframe>
-          </div>
-        </div>
-      </div>
-    </template>
-
-    <template id="app-access">
-      <div
-        ref="appAccess"
-        class="access-container"
-        :class="{ active }"
-        :style="dataAccess.position"
-      >
-        <span v-html="dataAccess.iconHtml"></span>
-        <span class="name" v-text="dataAccess.name"></span>
-      </div>
-    </template>
-
     <!-- VUE-PRODUCTION -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <!-- VUE-DEVELOPMENT -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
 
     <!-- V-CALENDAR -->
     <script src="https://unpkg.com/v-calendar"></script>

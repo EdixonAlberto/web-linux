@@ -1,140 +1,13 @@
-import draggable from './draggable'
-import widgetList from './data/widgetList.json'
 import dates from './data/dates.json'
+import widgetList from './data/widgetList.json'
 import accessList from './data/accessList.json'
 import Cache from './Cache'
 
-Vue.component('AppWindow', {
-  template: '#app-window',
+// COMPONENTS
+import './components/AppWindow'
+import './components/AppAccess'
 
-  props: {
-    dataWindow: {
-      type: Object,
-      required: true
-    }
-  },
-
-  data() {
-    return {
-      showWindow: true,
-      maximizeWindow: false,
-      browserInput: 'https://www.google.com',
-      browserUrl: 'https://www.google.com/webhp?igu=1'
-    }
-  },
-
-  computed: {
-    styleCustom() {
-      return {
-        zIndex: 1000 + this.dataWindow.z,
-        ...this.dataWindow.position
-      }
-    }
-  },
-
-  methods: {
-    maximize() {
-      this.$refs.appWindow.style.transition = 'all 0.15s ease-in-out'
-      this.maximizeWindow = !this.maximizeWindow
-      this.$emit('maximized-window')
-    },
-
-    updateFocus() {
-      const newAppWindow = {
-        ...this.dataWindow,
-        focus: !this.dataWindow.focus
-      }
-
-      this.$emit('update-window', newAppWindow)
-    },
-
-    updatePosition(evt) {
-      // TODO: mejorar actualizacion de la posicion por medio del evento
-      // console.log(evt.button, evt.buttons)
-
-      const appWindow = this.$refs.appWindow
-
-      if (appWindow) {
-        const newAppWindow = {
-          ...this.dataWindow,
-          position: {
-            top: appWindow.style.top,
-            right: appWindow.style.right,
-            bottom: appWindow.style.bottom,
-            left: appWindow.style.left
-          }
-        }
-
-        this.$emit('update-window', newAppWindow)
-      }
-    },
-
-    setBrowserUrl(input = '') {
-      let inputUrl = input || this.browserInput
-      const isGoogle = inputUrl.search(/google.com$/) > -1
-
-      inputUrl = isGoogle ? 'www.google.com' : inputUrl
-      this.browserInput = `https://${inputUrl}`
-
-      inputUrl = isGoogle ? 'google.com/webhp?igu=1' : inputUrl
-      this.browserUrl = `https://${inputUrl}`
-    }
-  },
-
-  mounted() {
-    const { appWindow } = this.$refs
-    const appHeader = appWindow.children[0]
-    const buttons = appHeader.children[2]
-    const header = document.querySelector('header')
-
-    const offsetPosition = {
-      left: 0,
-      top: header.clientHeight
-    }
-
-    draggable(appWindow, appHeader, buttons, offsetPosition)
-  }
-})
-
-Vue.component('AppAccess', {
-  template: '#app-access',
-
-  props: {
-    dataAccess: {
-      type: Object,
-      required: true
-    },
-    event: {
-      type: String,
-      required: true
-    }
-  },
-
-  data() {
-    return {
-      active: false
-    }
-  },
-
-  watch: {
-    event(val) {
-      console.log(val)
-    }
-  },
-
-  mounted() {
-    const header = document.querySelector('header')
-    const widgetSide = document.querySelector('section.widget-side')
-
-    const offsetPosition = {
-      left: widgetSide.clientWidth,
-      top: header.clientHeight
-    }
-
-    draggable(this.$refs.appAccess, null, null, offsetPosition)
-  }
-})
-
+// CACHE
 const cache = new Cache({
   desktops: [1],
   currentDesktop: 0,
@@ -142,6 +15,7 @@ const cache = new Cache({
   isLock: null
 })
 
+// APP
 new Vue({
   el: '#app',
 
