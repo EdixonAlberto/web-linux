@@ -14,9 +14,9 @@
   <body>
     <div id="app">
       <div v-if="!isMobile" class="desktop" :style="{ display: 'block' }">
-        <div
+        <!-- <div
           class="display-lock"
-          :class="[isLock !== null && (isLock ? 'lock' : 'unlock')]"
+          :class="[isLock !== null && (isLock ? 'on' : 'off')]"
           :style="{ filter: `brightness(${Number(progressBar.brightness) * 0.1})` }"
           @click="handlerLock('unlock')"
         >
@@ -28,6 +28,13 @@
           <span class="time">{{ dateDynamic.fullDateLock }}</span>
 
           <span class="text">Click or Press a Key to Unlock</span>
+        </div> -->
+
+        <div
+          class="display display-power"
+          :class="[isLock !== null && (isLock ? 'on' : 'off')]"
+        >
+          <span>UWU OFF</span>
         </div>
 
         <div

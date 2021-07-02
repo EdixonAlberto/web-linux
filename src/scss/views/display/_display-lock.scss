@@ -1,18 +1,4 @@
-@mixin animation($name) {
-  animation-name: $name;
-  animation-duration: 0.7s;
-  animation-delay: unset;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  animation-fill-mode: backwards;
-}
-
 .display-lock {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: -$height-header;
   padding-top: $height-header;
 
   display: grid;
@@ -21,18 +7,6 @@
 
   color: $color-nord-white;
   text-align: center;
-
-  z-index: $z-index-window + 20;
-  @extend %disable-selection;
-
-  &.lock {
-    @include animation(animate_deploy_lock);
-  }
-
-  &.unlock {
-    @include animation(animate_deploy_unlock);
-    transform: translateY(-100vh);
-  }
 
   span {
     &.date {
@@ -89,23 +63,5 @@
 
     background-color: rgba($color: #000000, $alpha: 0.2);
     z-index: -1;
-  }
-}
-
-@keyframes animate_deploy_lock {
-  0% {
-    transform: translateY(-100vh);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes animate_deploy_unlock {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100vh);
   }
 }
