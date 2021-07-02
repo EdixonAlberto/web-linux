@@ -1,7 +1,7 @@
 {
-  "name": "web-liss",
+  "name": "web-linux",
   "version": "1.0.0",
-  "description": "Personal website that looks like a linux desktop",
+  "description": "Web page that looks like a linux desktop",
   "license": "UNLICENSED",
   "private": true,
   "keywords": [
@@ -28,15 +28,6 @@
     "dev": "concurrently \"npm run sass-watch\" \"npm run js-watch\" \"npm start\"",
     "start": "npm run serve"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/EdixonAlberto/web-liss.git"
-  },
-  "bugs": {
-    "url": "https://github.com/EdixonAlberto/web-liss/issues"
-  },
-  "homepage": "http://skyliss.netlify.app",
-  "dependencies": {},
   "devDependencies": {
     "@babel/core": "^7.14.3",
     "@babel/preset-env": "^7.14.4",

@@ -1,18 +1,19 @@
-# Web Liss
+# Web Linux
 
 ![template](https://repository-images.githubusercontent.com/365625035/63466480-d7a7-11eb-9938-9d96ed6376a9)
 
-Personal website that looks like a linux desktop
+Web page that looks like a linux desktop.
 
-### [Go to website](http://skyliss.netlify.app) &#x279c;
+The idea was inspired by this [portfolio](https://vivek9patel.github.io/) and the design comes from [here](https://github.com/drahenprofi/dotfiles)
 
-## Languages
+### [Go to website](https://weblinux.netlify.app) &#x279c;
 
-- Html5
+## Languages Used
+
 - Vue2
 - Sass
 
-## Scripts
+## Commands List
 
 ```sh
 npm run dev # to development
