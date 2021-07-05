@@ -1,4 +1,5 @@
 .display-lock {
+  top: -$height-header;
   padding-top: $height-header;
 
   display: grid;
@@ -7,6 +8,14 @@
 
   color: $color-nord-white;
   text-align: center;
+
+  z-index: $z-index-window + 20;
+  transform: translateY(-100vh);
+  transition: all 0.7s cubic-bezier(0, 0, 0.2, 1);
+
+  &.lock {
+    transform: translateY(0);
+  }
 
   span {
     &.date {

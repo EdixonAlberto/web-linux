@@ -1,6 +1,7 @@
 import dates from './data/dates.json'
 import widgetList from './data/widgetList.json'
 import accessList from './data/accessList.json'
+import networks from './data/networks.json'
 import Cache from './Cache'
 
 // COMPONENTS
@@ -12,12 +13,15 @@ const cache = new Cache({
   desktops: [1],
   currentDesktop: 0,
   progressBar: { brightness: '10', volume: '3' },
-  isLock: null
+  isLock: null, // Se inicializa en null para que no aparezca la vista principal al inicio
+  isPower: true
 })
 
 // APP
 new Vue({
   el: '#app',
+
+  name: 'App',
 
   data() {
     return {
@@ -28,7 +32,8 @@ new Vue({
       appWindowList: [],
       appAccessList: accessList,
       accessEvent: '',
-      widgetList
+      widgetList,
+      networks
     }
   },
 
@@ -173,6 +178,13 @@ new Vue({
           removeEvent()
           break
       }
+    },
+
+    powerOff() {
+      this.isLock = true
+      this.isPower = null
+
+      setTimeout(() => (this.isPower = false), 2000)
     }
   },
 
@@ -192,6 +204,9 @@ new Vue({
     },
     isLock(val) {
       cache.setData({ isLock: val })
+    },
+    isPower(val) {
+      cache.setData({ isPower: val })
     }
   },
 

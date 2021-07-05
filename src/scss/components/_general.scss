@@ -1,0 +1,23 @@
+.liss-loading {
+  width: 40px;
+  height: 40px;
+  margin: auto;
+
+  border: 8px solid $color-nord-white;
+  border-right-color: $color-nord-blue;
+  border-radius: 50%;
+
+  @include animation(spinner, 1s, infinite);
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

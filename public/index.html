@@ -11,12 +11,36 @@
 
     <title>Web Linux</title>
   </head>
+
   <body>
     <div id="app">
       <div v-if="!isMobile" class="desktop" :style="{ display: 'block' }">
-        <!-- <div
-          class="display-lock"
-          :class="[isLock !== null && (isLock ? 'on' : 'off')]"
+        <div
+          class="display display-power"
+          :class="{
+            power: isPower || isPower === null,
+            unlock: !isLock && !isPower
+          }"
+        >
+          <img src="/static/images/logo-arch.png" alt="Arch Logo" />
+
+          <div v-if="!isPower" class="liss-loading"></div>
+          <i v-else class="fa fa-power-off" aria-hidden="true" @click="powerOff"></i>
+
+          <span>Arch</span>
+
+          <ul class="networks">
+            <li v-for="(net, i) of networks" :key="i">
+              <a :href="net.link" target="_blank" rel="noreferrer noopener">
+                {{ net.name }}
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          class="display display-lock"
+          :class="{ lock: isLock }"
           :style="{ filter: `brightness(${Number(progressBar.brightness) * 0.1})` }"
           @click="handlerLock('unlock')"
         >
@@ -28,17 +52,9 @@
           <span class="time">{{ dateDynamic.fullDateLock }}</span>
 
           <span class="text">Click or Press a Key to Unlock</span>
-        </div> -->
-
-        <div
-          class="display display-power"
-          :class="[isLock !== null && (isLock ? 'on' : 'off')]"
-        >
-          <span>UWU OFF</span>
         </div>
 
         <div
-          class="display"
           :style="{
             display: isLock === null ? 'none' : 'block',
             filter: `brightness(${Number(progressBar.brightness) * 0.1})`
@@ -100,10 +116,7 @@
             <section v-if="currentDesktop === 0" class="widget-center">
               <div class="col">
                 <div class="row avatar">
-                  <img
-                    src="https://simulacionymedicina.es/wp-content/uploads/2015/11/default-avatar-300x300-1.jpg"
-                    alt="Avatar"
-                  />
+                  <img src="/static/images/logo-arch.png" alt="Avatar" />
 
                   <p><span>arch</span>@<span>username</span></p>
                 </div>
@@ -180,7 +193,7 @@
 
             <section v-show="currentDesktop === 0" class="widget-side">
               <ul class="power">
-                <li class="box">
+                <li class="box" @click="isPower = true">
                   <i class="fa fa-power-off" aria-hidden="true"></i>
                 </li>
 
@@ -214,9 +227,9 @@
     </div>
 
     <!-- VUE-PRODUCTION -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
     <!-- VUE-DEVELOPMENT -->
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script> -->
 
     <!-- V-CALENDAR -->
     <script src="https://unpkg.com/v-calendar"></script>

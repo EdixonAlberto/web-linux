@@ -1,48 +1,8 @@
-@mixin animation($name) {
-  animation-name: $name;
-  animation-duration: 0.7s;
-  animation-delay: unset;
-  animation-iteration-count: 1;
-  animation-direction: normal;
-  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  animation-fill-mode: backwards;
-}
-
-@keyframes animate_deploy_on {
-  0% {
-    transform: translateY(-100vh);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-@keyframes animate_deploy_off {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(-100vh);
-  }
-}
+@import 'display-lock', 'display-power';
 
 .display {
   width: 100%;
   height: 100%;
   position: absolute;
-  top: -$height-header;
-
-  z-index: $z-index-window + 20;
   @extend %disable-selection;
-
-  &.on {
-    @include animation(animate_deploy_on);
-  }
-
-  &.off {
-    @include animation(animate_deploy_off);
-    transform: translateY(-100vh);
-  }
 }
-
-@import 'display-lock';

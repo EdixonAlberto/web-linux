@@ -1,5 +1,3 @@
-/********************************** SCROOLL DESIGN **************************************/
-
 @mixin scroll-custom {
   &::-webkit-scrollbar {
     width: 7px;
@@ -19,4 +17,14 @@
     cursor: default;
     background-color: $color-nord-yellow;
   }
+}
+
+@mixin animation($name, $duration, $iteration: 1) {
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-delay: unset;
+  animation-iteration-count: $iteration;
+  animation-direction: normal;
+  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  animation-fill-mode: backwards;
 }
