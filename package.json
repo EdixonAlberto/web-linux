@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Web page that looks like a linux desktop",
   "license": "UNLICENSED",
-  "private": true,
+  "private": false,
   "keywords": [
     "website",
     "portfolio",
