@@ -8,6 +8,6 @@
   "proseWrap": "always",
   "arrowParens": "avoid",
   "bracketSpacing": true,
-  "endOfLine": "crlf",
+  "endOfLine": "lf",
   "trailingComma": "none"
 }

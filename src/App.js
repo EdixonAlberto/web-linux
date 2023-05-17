@@ -1,7 +1,6 @@
 import dates from './data/dates.json'
 import widgetList from './data/widgetList.json'
 import accessList from './data/accessList.json'
-import networks from './data/networks.json'
 import Cache from './Cache'
 
 // COMPONENTS
@@ -32,8 +31,7 @@ new Vue({
       appWindowList: [],
       appAccessList: accessList,
       accessEvent: '',
-      widgetList,
-      networks
+      widgetList
     }
   },
 

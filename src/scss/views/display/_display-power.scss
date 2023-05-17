@@ -55,21 +55,22 @@
     padding-top: 20px;
   }
 
-  ul.networks {
-    list-style: none;
-    padding: 0;
+  .networks {
     display: flex;
-    column-gap: 20px;
     align-items: flex-start;
     justify-content: center;
 
-    li {
-      width: 80px;
-      height: 40px;
+    a {
+      line-height: 40px;
+      color: $color-nord-blue;
 
-      a {
-        line-height: 40px;
-        color: $color-nord-blue;
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      span {
+        font-size: 20px;
       }
     }
   }

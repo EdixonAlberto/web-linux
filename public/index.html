@@ -29,13 +29,11 @@
 
           <span>Arch</span>
 
-          <ul class="networks">
-            <li v-for="(net, i) of networks" :key="i">
-              <a :href="net.link" target="_blank" rel="noreferrer noopener">
-                {{ net.name }}
-              </a>
-            </li>
-          </ul>
+          <div class="networks">
+            <a href="https://github.com/EdixonAlberto/web-linux">
+              <span>Created by Edixon 🍍</span>
+            </a>
+          </div>
         </div>
 
         <div
@@ -220,9 +218,8 @@
         </div>
       </div>
 
-      <!-- TODO: despues crear un diseño responsive para mobile -->
       <div v-else class="mobile" :style="{ display: 'flex' }">
-        <span>For the moment this page is only available for viewing on the desktop</span>
+        <span>This page is only available for viewing on the desktop</span>
       </div>
     </div>
 

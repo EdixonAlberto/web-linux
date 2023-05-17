@@ -4,18 +4,9 @@
   "description": "Web page that looks like a linux desktop",
   "license": "UNLICENSED",
   "private": false,
-  "keywords": [
-    "website",
-    "portfolio",
-    "desktop",
-    "linux",
-    "sass",
-    "vue"
-  ],
   "author": {
     "name": "Edixon Piña",
-    "email": "edixonalbertto@gmail.com",
-    "url": "https://www.edixonalberto.com"
+    "email": "edixonalbertto@gmail.com"
   },
   "scripts": {
     "lint": "prettier --write public/index.html src/**/*.{js,scss}",
